@@ -6,19 +6,14 @@ import android.arch.persistence.room.PrimaryKey;
 
 import java.io.Serializable;
 
-@Entity
-public class Nanos implements Serializable {
+@Entity(tableName = "Nanos")
+public class Nanos {
     @PrimaryKey(autoGenerate = true)
     private int id;
-    @ColumnInfo(name = "name")
     private String name;
-    @ColumnInfo(name = "description")
     private String description;
-    @ColumnInfo(name = "author")
     private String author;
-    @ColumnInfo(name = "start")
     private String start;
-    @ColumnInfo(name = "location")
     private String location;
 
     public int getId() {
@@ -67,5 +62,10 @@ public class Nanos implements Serializable {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    @Override
+    public String toString() {
+        return "id : "+id+", name : "+name+", description : "+description+", author : "+author+", start"+start+", location : "+location;
     }
 }
