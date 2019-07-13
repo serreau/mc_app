@@ -19,6 +19,7 @@ public abstract class DB extends RoomDatabase {
             INSTANCE =  Room.databaseBuilder(context.getApplicationContext(), DB.class, "subapp-db")
                 .allowMainThreadQueries()
                 .build();
+        INSTANCE.clearAllTables();
         return INSTANCE;
     }
 }
