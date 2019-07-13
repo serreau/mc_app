@@ -6,21 +6,21 @@ import android.arch.persistence.room.PrimaryKey;
 
 import java.io.Serializable;
 
-@Entity(tableName = "Nanos")
-public class Nanos {
+@Entity(tableName = "Nano")
+public class Nano {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
     private String name;
     private String description;
     private String author;
     private String start;
     private String location;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
