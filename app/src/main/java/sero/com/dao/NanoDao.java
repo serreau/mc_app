@@ -21,8 +21,11 @@ public interface NanoDao {
     @Update
     void update(Nano nanos);
 
-    @Query("SELECT * FROM Nano WHERE (:id)")
+    @Query("SELECT * FROM Nano WHERE id = (:id)")
     Nano get(long id);
+
+    @Query("SELECT * FROM Nano WHERE name like (:name)")
+    List<Nano> contains(String name);
 
     @Query("SELECT * FROM Nano")
     List<Nano> getAll();

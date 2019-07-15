@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SubApp</string>
+    <string name="hint_home">Trouver un NanoJob</string>
 </resources>

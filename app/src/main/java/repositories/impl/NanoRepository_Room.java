@@ -39,6 +39,10 @@ public class NanoRepository_Room implements Repository<Nano> {
     }
 
     @Override
+    public List<Nano> contains(String id) {
+        return nanoDao.contains(id);
+    }
+    @Override
     public List<Nano> getAll() {
         return nanoDao.getAll();
     }

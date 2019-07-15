@@ -7,5 +7,6 @@ public interface Repository<T> {
     void delete(T object);
     void update(T object);
     T get(long id);
+    List<T> contains(String id);
     List<T> getAll();
 }
