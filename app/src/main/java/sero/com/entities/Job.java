@@ -4,10 +4,8 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.io.Serializable;
-
-@Entity(tableName = "Nano")
-public class Nano {
+@Entity(tableName = "Job")
+public class Job {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;

@@ -12,31 +12,38 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import Factories.RepositoryFactory;
-import repositories.Repository;
-import sero.com.entities.Nano;
+import sero.com.Factories.RepositoryFactory;
+import sero.com.repositories.JobRepository;
+import sero.com.entities.Job;
 
 public class MainActivity extends Activity {
-    Repository nanoRepository;
+    JobRepository jobrepository;
 
-    TextInputEditText textedit;
-    FloatingActionButton addnano;
+    TextInputEditText searchjob_input;
+    FloatingActionButton addjob_button;
     ListView listview;
+
+    ArrayAdapter<Job> arrayadapter;
+    ArrayList<Job> arraylist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        nanoRepository = RepositoryFactory.get(RepositoryFactory.Entities.NANO, this.getApplicationContext());
+        jobrepository = RepositoryFactory.getJobRepository(RepositoryFactory.Entities.JOB , this.getApplicationContext());
 
-        textedit = (TextInputEditText) findViewById(R.id.textedit_home);
-        addnano = (FloatingActionButton) findViewById(R.id.button_home);
-        listview = (ListView) findViewById(R.id.list_home);
+        searchjob_input = findViewById(R.id.textedit_home);
+        addjob_button = findViewById(R.id.button_home);
+        listview = findViewById(R.id.list_home);
+
+        arraylist = new ArrayList<>();
+        arrayadapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arraylist);
+
+        listview.setAdapter(arrayadapter);
 
 
-        textedit.addTextChangedListener(new TextWatcher() {
+        searchjob_input.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
@@ -45,18 +52,19 @@ public class MainActivity extends Activity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                arraylist.removeAll(arraylist);
+                arrayadapter.addAll(jobrepository.contains(editable.toString()));
             }
         });
 
-        addnano.setOnClickListener(new View.OnClickListener() {
+        addjob_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Nano n = new Nano();
-                n.setName(textedit.getText().toString());
-                nanoRepository.insert(n);
-                Toast t = Toast.makeText( getApplicationContext(), "test", Toast.LENGTH_SHORT );
-                t.show();
-                System.out.println(nanoRepository.getAll().toString());
+                Job n = new Job();
+                n.setName(searchjob_input.getText().toString());
+                jobrepository.insert(n);
+                arrayadapter.add(n);
+                Toast.makeText( getApplicationContext(), "Nouveau Job créé", Toast.LENGTH_SHORT ).show();
             }
         });
 
