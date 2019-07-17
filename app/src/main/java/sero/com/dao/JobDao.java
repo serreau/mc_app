@@ -1,5 +1,6 @@
 package sero.com.dao;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -22,11 +23,11 @@ public interface JobDao {
     void update(Job job);
 
     @Query("SELECT * FROM Job WHERE id = (:id)")
-    Job get(long id);
+    LiveData<Job> get(long id);
 
     @Query("SELECT * FROM Job WHERE name LIKE '%' || :name || '%'")
-    List<Job> contains(String name);
+    LiveData<List<Job>> contains(String name);
 
     @Query("SELECT * FROM Job")
-    List<Job> getAll();
+    LiveData<List<Job>> getAll();
 }
