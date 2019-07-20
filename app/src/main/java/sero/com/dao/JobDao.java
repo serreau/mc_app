@@ -29,5 +29,5 @@ public interface JobDao {
     LiveData<List<Job>> contains(String name);
 
     @Query("SELECT * FROM Job")
-    LiveData<List<Job>> getAll();
+    LiveData<List<Job>> get();
 }

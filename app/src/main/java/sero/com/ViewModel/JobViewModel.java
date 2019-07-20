@@ -2,10 +2,14 @@ package sero.com.ViewModel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.Transformations;
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -16,14 +20,19 @@ import sero.com.repositories.JobRepository;
 public class JobViewModel extends AndroidViewModel {
 
     private final JobRepository jobrepository;
-    Executor executor;
+    MutableLiveData<String> search;
+    LiveData<List<Job>> jobsbysearch;
 
-    public LiveData<List<Job>> alljobs;
 
     public JobViewModel(Application application) {
         super(application);
+        //executor = new Executors.newSingleThreadExecutor();
         jobrepository = RepositoryFactory.getJobRepository(RepositoryFactory.Entities.JOB, application);
-        alljobs = this.getAll();
+
+        search = new MutableLiveData();
+        jobsbysearch = Transformations.switchMap(search, search -> {
+            return jobrepository.contains(search);
+        });
     }
 
     public void insert(Job job){
@@ -42,11 +51,12 @@ public class JobViewModel extends AndroidViewModel {
         return jobrepository.get(id);
     }
 
-    public LiveData<List<Job>> getAll(){
-        return jobrepository.getAll();
+    public LiveData<List<Job>> get(){
+        return jobrepository.get();
     }
 
-    public LiveData<List<Job>> contains(String name){
-        return jobrepository.contains(name);
-    }
+    public LiveData<List<Job>> contains(String inputsearch){ return jobsbysearch; }
+
+    public void setSearch(String text){ search.setValue(text); }
+
 }

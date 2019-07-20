@@ -13,12 +13,10 @@ import sero.com.entities.Job;
 public class JobRepository_Room implements JobRepository<Job> {
     DB db;
     JobDao jobdao;
-    LiveData<List<Job>> alljobs;
 
     public JobRepository_Room(Context context){
         db = DB.getInstance(context);
         jobdao = db.jobDao();
-        alljobs = jobdao.getAll();
     }
 
     @Override
@@ -42,11 +40,13 @@ public class JobRepository_Room implements JobRepository<Job> {
     }
 
     @Override
-    public LiveData<List<Job>> contains(String id) {
-        return jobdao.contains(id);
-    }
+    public LiveData<List<Job>> get() { return jobdao.get(); }
+
     @Override
-    public LiveData<List<Job>> getAll() {
-        return jobdao.getAll();
+    public LiveData<List<Job>> contains(String search) {
+        return jobdao.contains(search);
     }
+
+
+
 }

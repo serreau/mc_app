@@ -9,5 +9,4 @@ public interface Repository<T> {
     void delete(T object);
     void update(T object);
     LiveData<T> get(long id);
-    LiveData<List<T>> getAll();
 }
