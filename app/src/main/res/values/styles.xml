@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <style name="Theme.MyApp" parent="Platform.MaterialComponents.Light">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:statusBarColor">@color/colorSecondary</item>
         <item name="android:windowLightStatusBar">true</item>
 
     </style>
