@@ -9,7 +9,7 @@ import android.content.Context;
 import sero.com.dao.JobDao;
 import sero.com.entities.Job;
 
-@Database(entities = {Job.class}, version = 1)
+@Database(entities = {Job.class}, version = 1, exportSchema = false)
 public abstract class DB extends RoomDatabase {
     private static DB INSTANCE;
 

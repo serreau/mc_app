@@ -14,7 +14,7 @@ import sero.com.repositories.JobRepository;
 
 public class JobViewModel extends AndroidViewModel {
 
-    private final JobRepository jobrepository;
+    JobRepository jobrepository;
     MutableLiveData<String> search;
     LiveData<List<Job>> jobsbysearch;
 
@@ -22,12 +22,14 @@ public class JobViewModel extends AndroidViewModel {
     public JobViewModel(Application application) {
         super(application);
         //executor = new Executors.newSingleThreadExecutor();
-        jobrepository = RepositoryFactory.getJobRepository(RepositoryFactory.Entities.JOB, application);
-
-        search = new MutableLiveData();
-        jobsbysearch = Transformations.switchMap(search, search -> {
-            return jobrepository.contains(search);
-        });
+        if(jobrepository == null)
+            jobrepository = RepositoryFactory.getJobRepository(RepositoryFactory.Entities.JOB, application);
+        if(search == null)
+            search = new MutableLiveData();
+        if(jobsbysearch == null)
+            jobsbysearch = Transformations.switchMap(search, search -> {
+                return jobrepository.contains(search);
+            });
     }
 
     public void insert(Job job){

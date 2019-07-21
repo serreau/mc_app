@@ -13,11 +13,9 @@ import sero.com.entities.Job;
 import sero.com.subapp.R;
 
 public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
-    private final LayoutInflater mInflater;
     public List<Job> jobs;
 
     public JobAdapter(Context context, List<Job> jobs) {
-        mInflater = LayoutInflater.from(context);
         this.jobs = jobs;
     }
 
@@ -29,7 +27,9 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
 
     @Override
     public void onBindViewHolder(JobViewHolder holder, int position) {
-        holder.setText(jobs.get(position).getName());
+        holder.setTitle(jobs.get(position).getTitle());
+        holder.setDescription(jobs.get(position).getDescription());
+        holder.setDate(jobs.get(position).getStart());
     }
 
     @Override
@@ -43,15 +43,25 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     }
 
     public static class JobViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView;
+        public TextView title;
+        public TextView description;
+        public TextView date;
 
         public JobViewHolder(View v) {
             super(v);
-            textView = v.findViewById(R.id.item_recycler_home);
+            title = v.findViewById(R.id.title_card);
+            description = v.findViewById(R.id.description_card);
+            date = v.findViewById(R.id.date_card);
         }
 
-        public void setText(String text) {
-            this.textView.setText(text);
+        public void setTitle(String text) {
+            this.title.setText(text);
+        }
+        public void setDescription(String text) {
+            this.description.setText(text);
+        }
+        public void setDate(String text) {
+            this.date.setText(text);
         }
     }
 }

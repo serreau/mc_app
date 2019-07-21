@@ -8,7 +8,7 @@ import android.arch.persistence.room.PrimaryKey;
 public class Job {
     @PrimaryKey(autoGenerate = true)
     private long id;
-    private String name;
+    private String title;
     private String description;
     private String author;
     private String start;
@@ -22,12 +22,12 @@ public class Job {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -64,6 +64,6 @@ public class Job {
 
     @Override
     public String toString() {
-        return "id : "+id+", name : "+name+", description : "+description+", author : "+author+", start"+start+", location : "+location;
+        return "id : "+id+", title : "+title+", description : "+description+", author : "+author+", start"+start+", location : "+location;
     }
 }

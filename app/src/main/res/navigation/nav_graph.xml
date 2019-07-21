@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/searchFragment">
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="sero.com.subapp.fragments.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/activity_main">
+        <action
+            android:id="@+id/action_searchFragment_to_createJobFragment"
+            app:destination="@id/createJobFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createJobFragment"
+        android:name="sero.com.subapp.fragments.CreateJobFragment"
+        android:label="CreateJobFragment"
+        tools:layout="@layout/activity_main"/>
+</navigation>

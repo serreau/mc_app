@@ -3,15 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     android:id="@+id/framelayout_home"
     android:background="@color/colorPrimary">
 
-    <FrameLayout
-        android:id="@+id/fragment_container"
+
+    <fragment
+        android:id="@+id/navHost"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:navGraph="@navigation/nav_graph"
+        app:defaultNavHost="true" />
+
 
 </FrameLayout>

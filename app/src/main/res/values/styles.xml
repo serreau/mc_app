@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="android:statusBarColor">@color/colorSecondary</item>
         <item name="android:windowLightStatusBar">true</item>
-
+        <item name="windowNoTitle">true</item>
     </style>
 
 </resources>

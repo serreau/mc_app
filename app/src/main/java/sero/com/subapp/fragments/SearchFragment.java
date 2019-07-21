@@ -16,6 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +30,9 @@ import sero.com.subapp.adapters.JobAdapter;
 public class SearchFragment extends Fragment {
     JobViewModel jobviewmodel;
 
+    FloatingActionButton action_button;
     TextInputEditText searchjob_input;
-    FloatingActionButton addjob_button;
+
     RecyclerView recyclerView;
     private JobAdapter mAdapter;
 
@@ -39,8 +43,8 @@ public class SearchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.search_fragment, container, false);
 
+        action_button = view.findViewById(R.id.action_button);
         searchjob_input = view.findViewById(R.id.textedit_home);
-        addjob_button = view.findViewById(R.id.button_home);
 
         arraylist = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recycler_home);
@@ -48,7 +52,7 @@ public class SearchFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mAdapter);
 
-        jobviewmodel = ViewModelProviders.of(this).get(JobViewModel.class);
+        jobviewmodel = ViewModelProviders.of(getActivity()).get(JobViewModel.class);
         jobviewmodel.contains(searchjob_input.getText().toString()).observe(this, jobs -> {
             mAdapter.setJobs(jobs);
         });
@@ -66,12 +70,12 @@ public class SearchFragment extends Fragment {
             }
         });
 
-        addjob_button.setOnClickListener(v -> {
-            Job job = new Job();
-            job.setName(searchjob_input.getText().toString());
-            jobviewmodel.insert(job);
-            Toast.makeText( getContext(), "Nouveau Job créé", Toast.LENGTH_SHORT ).show();
-        });
+        action_button.setOnClickListener(
+                Navigation.createNavigateOnClickListener(
+                        R.id.action_searchFragment_to_createJobFragment
+                ));
+
         return  view;
     }
+
 }

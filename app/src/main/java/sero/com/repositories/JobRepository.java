@@ -4,8 +4,6 @@ import android.arch.lifecycle.LiveData;
 
 import java.util.List;
 
-import sero.com.entities.Job;
-
 public interface JobRepository<Job> extends Repository<Job>{
     void insert(Job object);
     void delete(Job object);
@@ -13,5 +11,5 @@ public interface JobRepository<Job> extends Repository<Job>{
     LiveData<Job> get(long id);
     LiveData<List<Job>> get();
 
-    LiveData<List<Job>> contains(String name);
+    LiveData<List<Job>> contains(String title);
 }
