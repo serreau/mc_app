@@ -53,9 +53,8 @@ public class SearchFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
 
         jobviewmodel = ViewModelProviders.of(getActivity()).get(JobViewModel.class);
-        jobviewmodel.contains(searchjob_input.getText().toString()).observe(this, jobs -> {
-            mAdapter.setJobs(jobs);
-        });
+        jobviewmodel.contains(searchjob_input.getText().toString()).observe(
+                this, jobs -> mAdapter.setJobs(jobs));
 
         searchjob_input.addTextChangedListener(new TextWatcher() {
             @Override

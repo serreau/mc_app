@@ -7,8 +7,7 @@
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    android:id="@+id/framelayout_home"
-    android:background="@color/colorPrimary">
+    android:id="@+id/framelayout_home">
 
 
     <fragment
@@ -17,7 +16,7 @@
         android:layout_height="match_parent"
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:navGraph="@navigation/nav_graph"
-        app:defaultNavHost="true" />
+        app:defaultNavHost="true"/>
 
 
 </FrameLayout>

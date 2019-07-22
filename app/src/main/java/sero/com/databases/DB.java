@@ -4,12 +4,14 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
 import sero.com.dao.JobDao;
 import sero.com.entities.Job;
 
 @Database(entities = {Job.class}, version = 1, exportSchema = false)
+@TypeConverters(Converters.class)
 public abstract class DB extends RoomDatabase {
     private static DB INSTANCE;
 
