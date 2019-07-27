@@ -30,7 +30,7 @@
             android:id="@+id/job_2_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Je veux que"/>
+            android:hint="Je veux"/>
     </android.support.design.widget.TextInputLayout>
 
     <FrameLayout

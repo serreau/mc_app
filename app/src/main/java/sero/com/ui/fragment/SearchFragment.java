@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.navigation.Navigation;
+import androidx.navigation.Navigator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,8 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.search_fragment, container, false);
+
+
 
         action_button = view.findViewById(R.id.action_button);
         searchjob_input = view.findViewById(R.id.textedit_home);
@@ -72,7 +75,10 @@ public class SearchFragment extends Fragment {
                         R.id.action_searchFragment_to_createJobFragment
                 ));
 
+
         return  view;
     }
+
+
 
 }

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.navigation.Navigation;
+import androidx.navigation.Navigator;
 
 import sero.com.ui.viewmodel.JobViewModel;
 import sero.com.data.entities.Job;
@@ -33,6 +34,8 @@ public class CreateJobFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.createjob_fragment, container, false);
+        jobviewmodel = ViewModelProviders.of(getActivity()).get(JobViewModel.class);
+
         action_button = view.findViewById(R.id.action_button);
 
         title1 = view.findViewById(R.id.job_1_input);
@@ -40,9 +43,6 @@ public class CreateJobFragment extends Fragment {
 
         title1_inputlayout = view.findViewById(R.id.job_1_layout);
         title2_inputlayout = view.findViewById(R.id.job_2_layout);
-
-        jobviewmodel = ViewModelProviders.of(getActivity()).get(JobViewModel.class);
-
 
         title1.setOnFocusChangeListener(
                 (v,hasFocus) -> title1_inputlayout.setError(null));
@@ -65,6 +65,8 @@ public class CreateJobFragment extends Fragment {
                 title2_inputlayout.setError("Ce champs est obligatoire");
 
         });
+
         return view;
     }
+
 }

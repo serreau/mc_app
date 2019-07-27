@@ -23,7 +23,7 @@ public class JobViewModel extends AndroidViewModel {
         super(application);
         //executor = new Executors.newSingleThreadExecutor();
         if(jobrepository == null)
-            jobrepository = RepositoryFactory.getJobRepository(RepositoryFactory.Entities.JOB, application);
+            jobrepository = RepositoryFactory.getJobRepository(application);
         if(search == null)
             search = new MutableLiveData();
         if(jobsbysearch == null)

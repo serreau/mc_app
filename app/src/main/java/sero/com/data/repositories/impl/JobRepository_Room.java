@@ -47,6 +47,4 @@ public class JobRepository_Room implements JobRepository<Job> {
         return jobdao.contains(search);
     }
 
-
-
 }
