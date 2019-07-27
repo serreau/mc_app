@@ -1,4 +1,4 @@
-package sero.com.subapp;
+package sero.com.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

@@ -2,8 +2,8 @@ package sero.com.Factories;
 
 import android.content.Context;
 
-import sero.com.repositories.JobRepository;
-import sero.com.repositories.impl.JobRepository_Room;
+import sero.com.data.repositories.JobRepository;
+import sero.com.data.repositories.impl.JobRepository_Room;
 
 public class RepositoryFactory {
     public enum Entities{

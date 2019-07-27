@@ -1,16 +1,12 @@
-package sero.com.subapp.dialogs;
+package sero.com.ui.fragment.dialogs;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
-import android.widget.TextView;
 
 import java.util.Calendar;
-
-import sero.com.subapp.R;
 
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
@@ -29,8 +25,8 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
         // Do something with the date chosen by the user
-        TextInputEditText startdate = getActivity().findViewById(R.id.jobstartdate_input);
-        startdate.setText(day+"/"+(month+1)+"/"+year);
+        //TextInputEditText startdate = getActivity().findViewById(R.id.jobstartdate_input);
+        //startdate.setText(day+"/"+(month+1)+"/"+year);
 
     }
 }

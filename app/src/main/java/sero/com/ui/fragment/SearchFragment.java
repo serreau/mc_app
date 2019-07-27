@@ -1,4 +1,4 @@
-package sero.com.subapp.fragments;
+package sero.com.ui.fragment;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -14,18 +14,16 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import sero.com.ViewModel.JobViewModel;
-import sero.com.entities.Job;
-import sero.com.subapp.R;
-import sero.com.subapp.adapters.JobAdapter;
+import sero.com.ui.viewmodel.JobViewModel;
+import sero.com.data.entities.Job;
+import sero.com.ui.R;
+import sero.com.ui.adapter.JobAdapter;
 
 public class SearchFragment extends Fragment {
     JobViewModel jobviewmodel;

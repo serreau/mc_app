@@ -1,8 +1,6 @@
-package sero.com.repositories;
+package sero.com.data.repositories;
 
 import android.arch.lifecycle.LiveData;
-
-import java.util.List;
 
 public interface Repository<T> {
     void insert(T object);

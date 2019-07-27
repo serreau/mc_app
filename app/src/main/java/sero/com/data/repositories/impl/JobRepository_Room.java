@@ -1,14 +1,14 @@
-package sero.com.repositories.impl;
+package sero.com.data.repositories.impl;
 
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
 
 import java.util.List;
 
-import sero.com.dao.JobDao;
-import sero.com.repositories.JobRepository;
-import sero.com.databases.DB;
-import sero.com.entities.Job;
+import sero.com.data.dao.JobDao;
+import sero.com.data.databases.DB;
+import sero.com.data.entities.Job;
+import sero.com.data.repositories.JobRepository;
 
 public class JobRepository_Room implements JobRepository<Job> {
     DB db;
@@ -20,18 +20,18 @@ public class JobRepository_Room implements JobRepository<Job> {
     }
 
     @Override
-    public void update(Job object) {
-        jobdao.update(object);
+    public void update(Job job) {
+        jobdao.update(job);
     }
 
     @Override
-    public void insert(Job object) {
-        jobdao.insert(object);
+    public void insert(Job job) {
+        jobdao.insert(job);
     }
 
     @Override
-    public void delete(Job object) {
-        jobdao.delete(object);
+    public void delete(Job job) {
+        jobdao.delete(job);
     }
 
     @Override

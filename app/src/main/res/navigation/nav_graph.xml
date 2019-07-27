@@ -7,16 +7,23 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="sero.com.subapp.fragments.SearchFragment"
+        android:name="sero.com.ui.fragment.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/activity_main">
         <action
             android:id="@+id/action_searchFragment_to_createJobFragment"
             app:destination="@id/createJobFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/createJobFragment"
-        android:name="sero.com.subapp.fragments.CreateJobFragment"
+        android:name="sero.com.ui.fragment.CreateJobFragment"
         android:label="CreateJobFragment"
         tools:layout="@layout/activity_main"/>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="sero.com.ui.fragment.DetailsFragment"
+        android:label="DetailsFragment" />
 </navigation>

@@ -1,4 +1,4 @@
-package sero.com.databases;
+package sero.com.data.databases;
 
 import android.arch.persistence.room.TypeConverter;
 

@@ -1,4 +1,4 @@
-package sero.com.ViewModel;
+package sero.com.ui.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -9,8 +9,8 @@ import android.arch.lifecycle.Transformations;
 import java.util.List;
 
 import sero.com.Factories.RepositoryFactory;
-import sero.com.entities.Job;
-import sero.com.repositories.JobRepository;
+import sero.com.data.entities.Job;
+import sero.com.data.repositories.JobRepository;
 
 public class JobViewModel extends AndroidViewModel {
 
@@ -52,7 +52,7 @@ public class JobViewModel extends AndroidViewModel {
         return jobrepository.get();
     }
 
-    public LiveData<List<Job>> contains(String inputsearch){ return jobsbysearch; }
+    public LiveData<List<Job>> contains(String search){ return jobsbysearch; }
 
     public void setSearch(String text){ search.setValue(text); }
 
