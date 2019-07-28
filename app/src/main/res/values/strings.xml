@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">Nano</string>
     <string name="hint_home">Trouver un Job</string>
+
     <string name="fieldrequired_error">Ce champs est obliqatoire</string>
+    <string name="password_error">Mot de passe erroné</string>
+    <string name="error">Une erreur est survenue</string>
+    <string name="pattern_error">Ce format est incorrect</string>
+
+    <string name="title1">En tant que </string>
+    <string name="title2">je veux </string>
 </resources>

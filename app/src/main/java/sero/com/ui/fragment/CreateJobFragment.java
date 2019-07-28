@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import androidx.navigation.Navigation;
 import androidx.navigation.Navigator;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import sero.com.ui.viewmodel.JobViewModel;
 import sero.com.data.entities.Job;
 import sero.com.ui.R;
@@ -22,27 +24,21 @@ import sero.com.ui.R;
 public class CreateJobFragment extends Fragment {
     JobViewModel jobviewmodel;
 
-    FloatingActionButton action_button;
+    @BindView(R.id.action_button) FloatingActionButton action_button;
 
-    TextInputEditText title1;
-    TextInputEditText title2;
+    @BindView(R.id.job_1_input) TextInputEditText title1;
+    @BindView(R.id.job_2_input) TextInputEditText title2;
 
-    TextInputLayout title1_inputlayout;
-    TextInputLayout title2_inputlayout;
+    @BindView(R.id.job_1_layout) TextInputLayout title1_inputlayout;
+    @BindView(R.id.job_2_layout) TextInputLayout title2_inputlayout;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.createjob_fragment, container, false);
+        ButterKnife.bind(this, view);
+
         jobviewmodel = ViewModelProviders.of(getActivity()).get(JobViewModel.class);
-
-        action_button = view.findViewById(R.id.action_button);
-
-        title1 = view.findViewById(R.id.job_1_input);
-        title2 = view.findViewById(R.id.job_2_input);
-
-        title1_inputlayout = view.findViewById(R.id.job_1_layout);
-        title2_inputlayout = view.findViewById(R.id.job_2_layout);
 
         title1.setOnFocusChangeListener(
                 (v,hasFocus) -> title1_inputlayout.setError(null));
@@ -60,9 +56,9 @@ public class CreateJobFragment extends Fragment {
             }
 
             if (newjob.getTitle1().isEmpty())
-                title1_inputlayout.setError("Ce champs est obligatoire");
+                title1_inputlayout.setError(getString(R.string.fieldrequired_error));
             if (newjob.getTitle2().isEmpty())
-                title2_inputlayout.setError("Ce champs est obligatoire");
+                title2_inputlayout.setError(getString(R.string.fieldrequired_error));
 
         });
 

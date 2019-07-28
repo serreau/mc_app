@@ -3,23 +3,25 @@ package sero.com.ui.adapter;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.TextView;
 
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import java.util.List;
 
+import butterknife.BindString;
+import butterknife.ButterKnife;
 import sero.com.data.entities.Job;
 import sero.com.ui.R;
 
 public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     public List<Job> jobs;
+
+    @BindString(R.string.title1) String title1;
+    @BindString(R.string.title2) String title2;
 
     public JobAdapter(Context context, List<Job> jobs) {
         this.jobs = jobs;
@@ -28,6 +30,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     @Override
     public JobAdapter.JobViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_item, parent, false);
+        ButterKnife.bind(this, view);
 
         JobViewHolder jobviewholder = new JobViewHolder(view);
         view.setOnClickListener( v -> {
@@ -41,7 +44,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
 
     @Override
     public void onBindViewHolder(JobViewHolder holder, int position) {
-        holder.setTitle("En tant que "+jobs.get(position).getTitle1()+" "+"je veux que "+jobs.get(position).getTitle2());
+        holder.setTitle(title1+" "+jobs.get(position).getTitle1()+" "+title2+" "+jobs.get(position).getTitle2());
     }
 
     @Override

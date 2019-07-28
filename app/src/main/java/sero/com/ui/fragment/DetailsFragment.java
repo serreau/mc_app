@@ -22,21 +22,23 @@ import androidx.navigation.Navigation;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import sero.com.ui.viewmodel.JobViewModel;
 import sero.com.data.entities.Job;
 import sero.com.ui.R;
 import sero.com.ui.adapter.JobAdapter;
 
 public class DetailsFragment extends Fragment {
-        TextView title_text;
+        @BindView(R.id.title_card) TextView title_text;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.detailsjob_fragment, container, false);
+        ButterKnife.bind(this, view);
 
-        title_text = view.findViewById(R.id.title_card);
-        title_text.setText(getArguments().getString("title", "Une erreur est survenue"));
+        title_text.setText(getArguments().getString("title", getString(R.string.error)));
 
         return  view;
     }

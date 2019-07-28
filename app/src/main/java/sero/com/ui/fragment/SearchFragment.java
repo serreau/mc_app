@@ -21,6 +21,8 @@ import androidx.navigation.Navigator;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import sero.com.ui.viewmodel.JobViewModel;
 import sero.com.data.entities.Job;
 import sero.com.ui.R;
@@ -29,10 +31,10 @@ import sero.com.ui.adapter.JobAdapter;
 public class SearchFragment extends Fragment {
     JobViewModel jobviewmodel;
 
-    FloatingActionButton action_button;
-    TextInputEditText searchjob_input;
+    @BindView(R.id.action_button) FloatingActionButton action_button;
+    @BindView(R.id.textedit_home) TextInputEditText searchjob_input;
 
-    RecyclerView recyclerView;
+    @BindView(R.id.recycler_home) RecyclerView recyclerView;
     private JobAdapter mAdapter;
 
     List<Job> arraylist;
@@ -41,14 +43,9 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.search_fragment, container, false);
-
-
-
-        action_button = view.findViewById(R.id.action_button);
-        searchjob_input = view.findViewById(R.id.textedit_home);
+        ButterKnife.bind(this, view);
 
         arraylist = new ArrayList<>();
-        recyclerView = view.findViewById(R.id.recycler_home);
         mAdapter = new JobAdapter(getContext(), arraylist);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mAdapter);
