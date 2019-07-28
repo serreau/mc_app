@@ -1,6 +1,7 @@
 package sero.com.ui.fragment;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,6 +23,7 @@ import butterknife.ButterKnife;
 import sero.com.data.entities.User;
 import sero.com.ui.R;
 import sero.com.ui.viewmodel.UserViewModel;
+import sero.com.util.LoginManager;
 
 public class LoginFragment extends Fragment {
     UserViewModel userviewmodel;
@@ -41,13 +43,20 @@ public class LoginFragment extends Fragment {
     @BindView(R.id.login_button) Button login_button;
     @BindView(R.id.signup_button) Button signup_button;
 
+    Context c;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.login_fragment, container, false);
         ButterKnife.bind(this, view);
 
-        userviewmodel =  ViewModelProviders.of(this).get(UserViewModel.class);
+        c = getActivity();
+        userviewmodel = ViewModelProviders.of(this).get(UserViewModel.class);
+        userviewmodel.get(login_input.getText().toString()).observe(getActivity(), u -> {
+            LoginManager.login(u, c);
+        });
+
         login_button.setEnabled(false);
 
         login_input.addTextChangedListener(new TextWatcher() {
@@ -95,6 +104,7 @@ public class LoginFragment extends Fragment {
 
             if (userviewmodel.exist(login, password)) {
                 Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_searchFragment);
+                userviewmodel.setPhone(""+login);
             } else if (userviewmodel.exist(login)){
                 password_layout.setError(getString(R.string.password_error));
             } else {
@@ -128,6 +138,13 @@ public class LoginFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(LoginManager.exist(c))
+            Navigation.findNavController(this.getView()).navigate(R.id.action_loginFragment_to_searchFragment);
     }
 
     private void signUpMode(){

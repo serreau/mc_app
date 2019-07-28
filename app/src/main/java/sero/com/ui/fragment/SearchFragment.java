@@ -2,6 +2,7 @@ package sero.com.ui.fragment;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -11,9 +12,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.navigation.Navigation;
 import androidx.navigation.Navigator;
@@ -27,6 +30,7 @@ import sero.com.ui.viewmodel.JobViewModel;
 import sero.com.data.entities.Job;
 import sero.com.ui.R;
 import sero.com.ui.adapter.JobAdapter;
+import sero.com.util.LoginManager;
 
 public class SearchFragment extends Fragment {
     JobViewModel jobviewmodel;
@@ -71,7 +75,6 @@ public class SearchFragment extends Fragment {
                 Navigation.createNavigateOnClickListener(
                         R.id.action_searchFragment_to_createJobFragment
                 ));
-
 
         return  view;
     }

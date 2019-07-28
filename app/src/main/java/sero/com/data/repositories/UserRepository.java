@@ -6,7 +6,7 @@ import java.util.List;
 
 import sero.com.data.entities.Job;
 
-public interface UserRepository<User> extends Repository<User>{
+public interface UserRepository<User>{
     void insert(User user);
     void delete(User user);
     void update(User user);
