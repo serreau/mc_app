@@ -18,11 +18,14 @@ import android.widget.Button;
 
 import androidx.navigation.Navigation;
 
+import java.util.concurrent.Callable;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sero.com.data.entities.User;
 import sero.com.ui.R;
 import sero.com.ui.viewmodel.UserViewModel;
+import sero.com.util.InputValidator;
 import sero.com.util.LoginManager;
 
 public class LoginFragment extends Fragment {
@@ -53,105 +56,72 @@ public class LoginFragment extends Fragment {
 
         c = getActivity();
         userviewmodel = ViewModelProviders.of(this).get(UserViewModel.class);
-        userviewmodel.get(login_input.getText().toString()).observe(getActivity(), u -> {
+        userviewmodel.getUser().observe(getActivity(), u -> {
             LoginManager.login(u, c);
         });
 
-        login_button.setEnabled(false);
-
-        login_input.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                loginMode();
-            }
-        });
-
-        password_input.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                loginMode();
-            }
-        });
-
-        mail_input.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                signUpMode();
-            }
-        });
-
-        login_button.setOnClickListener( v -> {
-            long login = Long.parseLong(this.login_input.getText().toString());
-            String password = this.password_input.getText().toString();
-
-            if (userviewmodel.exist(login, password)) {
-                Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_searchFragment);
-                userviewmodel.setPhone(""+login);
-            } else if (userviewmodel.exist(login)){
-                password_layout.setError(getString(R.string.password_error));
-            } else {
-                signUpMode();
-            }
-        });
-
-        signup_button.setOnClickListener( v -> {
-            User user = new User();
-            user.setPhone(Long.parseLong(this.login_input.getText().toString()));
-            user.setPassword(this.password_input.getText().toString());
-            user.setMail(this.mail_input.getText().toString());
-            user.setFirstname(this.firstname_input.getText().toString());
-            user.setLastname(this.lastname_input.getText().toString());
-
-            if (user.getMail().isEmpty())
-                mail_layout.setError(getString(R.string.fieldrequired_error));
-            else if (!Patterns.EMAIL_ADDRESS.matcher(user.getMail()).matches())
-                mail_layout.setError(getString(R.string.pattern_error));
-            else {
-                userviewmodel.insert(user);
-                Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_searchFragment);
-            }
-        });
-
-        password_input.setOnFocusChangeListener((v,hf) -> {
-            password_layout.setError(null);
-        });
-        mail_input.setOnFocusChangeListener((v,hf) -> {
-            mail_layout.setError(null);
-        });
-
+        createListeners(view);
         return view;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if(LoginManager.exist(c))
+        if (LoginManager.exist(c))
             Navigation.findNavController(this.getView()).navigate(R.id.action_loginFragment_to_searchFragment);
     }
 
-    private void signUpMode(){
+    public void createListeners(View view) {
+        mTextWacher watcherloginmode = new mTextWacher(() -> loginMode());
+        mTextWacher watchersignupmode = new mTextWacher(() -> signUpMode());
+
+        login_input.addTextChangedListener(watcherloginmode);
+        password_input.addTextChangedListener(watcherloginmode);
+        mail_input.addTextChangedListener(watchersignupmode);
+
+        login_button.setOnClickListener(v -> {
+            long login = Long.parseLong(this.login_input.getText().toString());
+            String password = this.password_input.getText().toString();
+
+            if (InputValidator.isValidLoginPassword(login_layout, login_input, password_layout, password_input, getContext())) {
+                if(userviewmodel.exist(login,password)) {
+                    Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_searchFragment);
+                    userviewmodel.login("" + login);
+                }
+                else if(userviewmodel.exist(login)) {
+                    password_layout.setError(getString(R.string.password_error));
+                }
+                else {
+                    signUpMode();
+                }
+            }
+        });
+
+        signup_button.setOnClickListener(v -> {
+            User user = initUser();
+
+            if(InputValidator.isValidMail(mail_layout, mail_input, getContext())) {
+                userviewmodel.insert(user);
+                Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_searchFragment);
+                userviewmodel.login("" + user.getPhone());
+            }
+        });
+
+        login_input.setOnFocusChangeListener((v, hf) -> {
+            login_layout.setError(null);
+        });
+        password_input.setOnFocusChangeListener((v, hf) -> {
+            password_layout.setError(null);
+        });
+        mail_input.setOnFocusChangeListener((v, hf) -> {
+            mail_layout.setError(null);
+        });
+    }
+
+    private boolean signUpMode() {
         mail_layout.setVisibility(View.VISIBLE);
         firstname_layout.setVisibility(View.VISIBLE);
         lastname_layout.setVisibility(View.VISIBLE);
-
         login_button.setVisibility(View.GONE);
         signup_button.setVisibility(View.VISIBLE);
 
@@ -159,13 +129,13 @@ public class LoginFragment extends Fragment {
             signup_button.setEnabled(false);
         else
             signup_button.setEnabled(true);
+        return true;
     }
 
-    private void loginMode(){
+    private boolean loginMode() {
         mail_layout.setVisibility(View.GONE);
         firstname_layout.setVisibility(View.GONE);
         lastname_layout.setVisibility(View.GONE);
-
         login_button.setVisibility(View.VISIBLE);
         signup_button.setVisibility(View.GONE);
 
@@ -173,5 +143,34 @@ public class LoginFragment extends Fragment {
             login_button.setEnabled(false);
         else
             login_button.setEnabled(true);
+        return true;
+    }
+
+    private User initUser(){
+        User user = new User();
+        user.setPhone(Long.parseLong(this.login_input.getText().toString()));
+        user.setPassword(this.password_input.getText().toString());
+        user.setMail(this.mail_input.getText().toString());
+        user.setFirstname(this.firstname_input.getText().toString());
+        user.setLastname(this.lastname_input.getText().toString());
+        return  user;
+    }
+
+    public class mTextWacher implements TextWatcher {
+        Callable callable;
+
+        public mTextWacher(Callable c) { this.callable = c; }
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            try { callable.call(); }
+            catch (Exception e) { e.printStackTrace(); }
+        }
     }
 }

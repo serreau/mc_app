@@ -84,12 +84,14 @@
         android:id="@+id/login_button"
         android:text="Connexion"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:enabled="false"/>
 
     <Button
         android:id="@+id/signup_button"
         android:text="S'enregistrer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:enabled="false"/>
 </LinearLayout>

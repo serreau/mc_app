@@ -29,7 +29,7 @@ public class UserViewModel extends AndroidViewModel {
             });
     }
 
-    public void setPhone(String phone){
+    public void login(String phone){
         this.phone.setValue(phone);
     }
 
@@ -37,9 +37,7 @@ public class UserViewModel extends AndroidViewModel {
         userrepository.insert(user);
     }
 
-    public LiveData<User> get(String phone){
-        return user;
-    }
+    public LiveData<User> getUser(){ return user; }
 
     public boolean exist(long phone, String password){
         return userrepository.exist(phone, password);
