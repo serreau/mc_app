@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
+import android.util.Log;
 
 import java.security.CryptoPrimitive;
 
@@ -32,11 +33,11 @@ public abstract class DB extends RoomDatabase {
 
     private static void populate() {
         User u = new User();
-        u.setPhone(1);
-        u.setPassword("b");
-
-        if(!INSTANCE.userDao().exist(1,"b"))
-            INSTANCE.userDao().insert(u);
+        u.setPhone("0777777777");
+        u.setPassword("aaaaaaaa");
+        u.setMail("a@a.a");
+        u.setFirstname("a");
+        INSTANCE.userDao().insert(u);
     }
 
 }

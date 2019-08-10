@@ -10,7 +10,7 @@ import sero.com.data.databases.DB;
 import sero.com.data.entities.Job;
 import sero.com.data.repositories.JobRepository;
 
-public class JobRepository_Room implements JobRepository<Job> {
+public class JobRepository_Room implements JobRepository {
     DB db;
     JobDao jobdao;
 

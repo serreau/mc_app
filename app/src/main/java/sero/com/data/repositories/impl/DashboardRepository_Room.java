@@ -8,13 +8,14 @@ import java.util.List;
 import sero.com.data.dao.UserDao;
 import sero.com.data.databases.DB;
 import sero.com.data.entities.User;
+import sero.com.data.repositories.DashboardRepository;
 import sero.com.data.repositories.UserRepository;
 
-public class UserRepository_Room implements UserRepository {
+public class DashboardRepository_Room implements DashboardRepository {
     DB db;
     UserDao userdao;
 
-    public UserRepository_Room(Context context){
+    public DashboardRepository_Room(Context context){
         db = DB.getInstance(context);
         userdao = db.userDao();
     }

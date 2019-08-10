@@ -4,10 +4,9 @@ import android.arch.lifecycle.LiveData;
 
 import java.util.List;
 
-import sero.com.data.entities.Job;
 import sero.com.data.entities.User;
 
-public interface UserRepository{
+public interface DashboardRepository{
     void insert(User user);
     void delete(User user);
     void update(User user);

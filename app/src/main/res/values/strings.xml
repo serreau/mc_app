@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Nano</string>
+    <string name="app_name">MicroCosmos</string>
     <string name="hint_home">Trouver un Job</string>
 
     <string name="fieldrequired_error">Ce champs est obliqatoire</string>

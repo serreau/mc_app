@@ -24,14 +24,14 @@ public interface UserDao {
     void update(User user);
 
     @Query("SELECT * FROM User WHERE phone = (:phone)")
-    LiveData<User> get(long phone);
+    User get(String phone);
 
     @Query("SELECT * FROM User")
     LiveData<List<User>> get();
 
     @Query("SELECT 1 FROM User WHERE phone = (:phone)" )
-    boolean exist(long phone);
+    boolean exist(String phone);
 
     @Query("SELECT 1 FROM User WHERE phone = (:phone) and password = (:password)" )
-    boolean exist(long phone, String password);
+    boolean exist(String phone, String password);
 }

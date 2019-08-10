@@ -2,21 +2,23 @@ package sero.com.data.entities;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 @Entity(tableName = "User")
 public class User {
+    @NonNull
     @PrimaryKey
-    private long phone;
+    private String phone;
     private String password;
     private String mail;
-    private String lastname;
     private String firstname;
+    private String lastname;
 
-    public long getPhone() {
+    public String getPhone() {
         return this.phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -32,7 +34,7 @@ public class User {
         return this.lastname;
     }
 
-    public void setLastname(String nom) {
+    public void setLastname(String lastname) {
         this.lastname = lastname;
     }
 

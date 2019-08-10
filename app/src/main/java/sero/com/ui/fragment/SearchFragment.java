@@ -39,6 +39,9 @@ public class SearchFragment extends Fragment {
     @BindView(R.id.textedit_home) TextInputEditText searchjob_input;
 
     @BindView(R.id.recycler_home) RecyclerView recyclerView;
+
+    @BindView(R.id.goto_dashboard) TextView goto_dashboard;
+
     private JobAdapter mAdapter;
 
     List<Job> arraylist;
@@ -75,6 +78,11 @@ public class SearchFragment extends Fragment {
                 Navigation.createNavigateOnClickListener(
                         R.id.action_searchFragment_to_createJobFragment
                 ));
+
+
+        goto_dashboard.setOnClickListener( v -> {
+            Navigation.findNavController(view).navigate(R.id.action_searchFragment_to_dashboardFragment);
+        });
 
         return  view;
     }
