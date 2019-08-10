@@ -13,6 +13,7 @@ import sero.com.data.repositories.UserRepository;
 
 public class DashboardRepository_Room implements DashboardRepository {
     DB db;
+
     UserDao userdao;
 
     public DashboardRepository_Room(Context context){
@@ -52,4 +53,5 @@ public class DashboardRepository_Room implements DashboardRepository {
     public boolean exist(String phone) {
         return userdao.exist(phone);
     }
+
 }

@@ -1,19 +1,24 @@
 package sero.com.ui.fragment.dashboard;
 
+import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.navigation.Navigation;
@@ -25,14 +30,23 @@ import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.URI;
 import java.util.List;
+
+import javax.xml.transform.URIResolver;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import sero.com.data.entities.User;
 import sero.com.ui.R;
+import sero.com.util.FileManager;
 import sero.com.util.LoginManager;
+import sero.com.util.PermissionManager;
 
 public class DashboardFragment extends Fragment implements  Validator.ValidationListener{
     DashboardViewModel viewmodel;
@@ -80,6 +94,7 @@ public class DashboardFragment extends Fragment implements  Validator.Validation
 
     public static final int PICK_IMAGE = 1;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -110,6 +125,7 @@ public class DashboardFragment extends Fragment implements  Validator.Validation
             lastname_input.setText(user.getLastname());
             password_input.setText(user.getPassword());
             passwordconfirmation_input.setText(user.getPassword());
+            picture_image.setImageURI(FileManager.getProfilImage());
         });
 
         save_button.setOnClickListener( v -> {
@@ -126,7 +142,6 @@ public class DashboardFragment extends Fragment implements  Validator.Validation
         mail_input.setOnFocusChangeListener((view1, b) -> mail_layout.setError(null));
 
     }
-
 
     @Override
     public void onValidationSucceeded() {
@@ -155,12 +170,30 @@ public class DashboardFragment extends Fragment implements  Validator.Validation
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        if (requestCode == PICK_IMAGE) {
-            picture_image.setImageURI(data.getData());
-            Log.e("SUCCES", "LIMAAAAGE");
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
+            try {
+                String profile = FileManager.getProfilImage().getPath();
+                LoginManager.getSp(getContext()).edit().putString("profile_image", profile);
+                FileOutputStream out = new FileOutputStream(profile);
+
+                InputStream in = getContext().getContentResolver().openInputStream(data.getData());
+                Bitmap b = BitmapFactory.decodeStream(in);
+
+                b.compress(Bitmap.CompressFormat.PNG, 100, out);
+                picture_image.setImageBitmap(b);
+
+            } catch (FileNotFoundException e){
+                PermissionManager.verifyStoragePermissions(getActivity());
+            } catch (Exception e){
+                Toast.makeText(this.getContext(), "Problème lors du chargement de la photo de profil", Toast.LENGTH_SHORT).show();
+            }
+
+
         }
     }
+
+
 
 }

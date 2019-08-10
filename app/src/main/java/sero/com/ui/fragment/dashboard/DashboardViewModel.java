@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Transformations;
+import android.net.Uri;
 
 import sero.com.Factories.RepositoryFactory;
 import sero.com.data.entities.User;
@@ -20,7 +21,6 @@ public class DashboardViewModel extends AndroidViewModel {
     LiveData<String> firstname;
     LiveData<String> lastname;
     LiveData<String> password;
-
 
     public DashboardViewModel(Application application) {
         super(application);
