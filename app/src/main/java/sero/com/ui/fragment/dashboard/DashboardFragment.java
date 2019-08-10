@@ -1,16 +1,19 @@
 package sero.com.ui.fragment.dashboard;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.navigation.Navigation;
@@ -26,12 +29,16 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 import sero.com.data.entities.User;
 import sero.com.ui.R;
 import sero.com.util.LoginManager;
 
 public class DashboardFragment extends Fragment implements  Validator.ValidationListener{
     DashboardViewModel viewmodel;
+
+    @BindView(R.id.picture_image)
+    CircleImageView picture_image;
 
     @BindView(R.id.login_layout)
     TextInputLayout login_layout;
@@ -71,6 +78,7 @@ public class DashboardFragment extends Fragment implements  Validator.Validation
 
     private Validator validator;
 
+    public static final int PICK_IMAGE = 1;
 
     @Nullable
     @Override
@@ -88,6 +96,13 @@ public class DashboardFragment extends Fragment implements  Validator.Validation
     }
 
     private void createListeners(View view) {
+        picture_image.setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+        });
+
         viewmodel.getUser().observe(this, user -> {
             login_input.setText(user.getPhone());
             mail_input.setText(user.getMail());
@@ -137,6 +152,15 @@ public class DashboardFragment extends Fragment implements  Validator.Validation
 
     public String getText(TextInputEditText input){
         return input.getText().toString();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == PICK_IMAGE) {
+            picture_image.setImageURI(data.getData());
+            Log.e("SUCCES", "LIMAAAAGE");
+        }
     }
 
 }
