@@ -2,6 +2,7 @@ package sero.com.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 
 import sero.com.data.entities.User;
 

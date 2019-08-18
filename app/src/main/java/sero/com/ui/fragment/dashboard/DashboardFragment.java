@@ -2,14 +2,8 @@ package sero.com.ui.fragment.dashboard;
 
 import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -29,30 +23,22 @@ import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
+import com.squareup.picasso.Picasso;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.net.URI;
 import java.util.List;
-
-import javax.xml.transform.URIResolver;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import sero.com.data.entities.User;
 import sero.com.ui.R;
-import sero.com.util.FileManager;
 import sero.com.util.LoginManager;
-import sero.com.util.PermissionManager;
 
 public class DashboardFragment extends Fragment implements  Validator.ValidationListener{
     DashboardViewModel viewmodel;
 
     @BindView(R.id.picture_image)
-    CircleImageView picture_image;
+    CircleImageView profil_image;
 
     @BindView(R.id.login_layout)
     TextInputLayout login_layout;
@@ -111,7 +97,7 @@ public class DashboardFragment extends Fragment implements  Validator.Validation
     }
 
     private void createListeners(View view) {
-        picture_image.setOnClickListener(v -> {
+        profil_image.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -125,7 +111,11 @@ public class DashboardFragment extends Fragment implements  Validator.Validation
             lastname_input.setText(user.getLastname());
             password_input.setText(user.getPassword());
             passwordconfirmation_input.setText(user.getPassword());
-            picture_image.setImageURI(FileManager.getProfilImage());
+            Picasso.get()
+                    .load(user.getImage())
+                    .error(R.drawable.default_icon)
+                    .placeholder(R.drawable.default_icon)
+                    .into(profil_image);
         });
 
         save_button.setOnClickListener( v -> {
@@ -173,24 +163,12 @@ public class DashboardFragment extends Fragment implements  Validator.Validation
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
-            try {
-                String profile = FileManager.getProfilImage().getPath();
-                LoginManager.getSp(getContext()).edit().putString("profile_image", profile);
-                FileOutputStream out = new FileOutputStream(profile);
-
-                InputStream in = getContext().getContentResolver().openInputStream(data.getData());
-                Bitmap b = BitmapFactory.decodeStream(in);
-
-                b.compress(Bitmap.CompressFormat.PNG, 100, out);
-                picture_image.setImageBitmap(b);
-
-            } catch (FileNotFoundException e){
-                PermissionManager.verifyStoragePermissions(getActivity());
-            } catch (Exception e){
-                Toast.makeText(this.getContext(), "Problème lors du chargement de la photo de profil", Toast.LENGTH_SHORT).show();
-            }
-
-
+            viewmodel.setImage(data.getData());
+            Picasso.get()
+                    .load(data.getData())
+                    .error(R.drawable.default_icon)
+                    .placeholder(R.drawable.default_icon)
+                    .into(profil_image);
         }
     }
 

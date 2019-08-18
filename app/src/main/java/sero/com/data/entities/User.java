@@ -2,7 +2,11 @@ package sero.com.data.entities;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+
+import sero.com.data.databases.Converters;
 
 @Entity(tableName = "User")
 public class User {
@@ -13,6 +17,7 @@ public class User {
     private String mail;
     private String firstname;
     private String lastname;
+    private String image;
 
     public String getPhone() {
         return this.phone;
@@ -52,5 +57,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

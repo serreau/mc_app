@@ -6,6 +6,7 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
+import android.net.Uri;
 
 import java.util.List;
 
@@ -34,4 +35,7 @@ public interface UserDao {
 
     @Query("SELECT 1 FROM User WHERE phone = (:phone) and password = (:password)" )
     boolean exist(String phone, String password);
+
+    @Query("UPDATE User SET image = :image WHERE phone = :login")
+    void updateImage(String login, String image);
 }

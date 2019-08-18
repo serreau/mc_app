@@ -2,6 +2,7 @@ package sero.com.data.repositories.impl;
 
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
+import android.net.Uri;
 
 import java.util.List;
 
@@ -54,4 +55,8 @@ public class DashboardRepository_Room implements DashboardRepository {
         return userdao.exist(phone);
     }
 
+    @Override
+    public void updateImage(String login, String image) {
+        userdao.updateImage(login, image);
+    }
 }

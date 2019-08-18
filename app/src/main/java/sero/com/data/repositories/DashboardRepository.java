@@ -1,6 +1,7 @@
 package sero.com.data.repositories;
 
 import android.arch.lifecycle.LiveData;
+import android.net.Uri;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface DashboardRepository{
 
     boolean exist(String phone, String password);
     boolean exist(String phone);
+
+    void updateImage(String login, String image);
 }
