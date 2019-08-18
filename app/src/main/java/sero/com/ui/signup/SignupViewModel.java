@@ -1,18 +1,18 @@
-package sero.com.ui.fragment.login;
+package sero.com.ui.signup;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 
-import sero.com.Factories.RepositoryFactory;
+import sero.com.data.Factories.RepositoryFactory;
 import sero.com.data.entities.User;
 import sero.com.data.repositories.UserRepository;
 import sero.com.util.LoginManager;
 
-public class LoginViewModel extends AndroidViewModel {
+public class SignupViewModel extends AndroidViewModel {
 
     UserRepository userrepository;
 
-    public LoginViewModel(Application application) {
+    public SignupViewModel(Application application) {
         super(application);
         if(userrepository == null)
             userrepository = RepositoryFactory.getUserRepository(application);
@@ -22,8 +22,15 @@ public class LoginViewModel extends AndroidViewModel {
         LoginManager.login(login, getApplication());
     }
 
-    public boolean exist(String login, String password){
-        return userrepository.exist(login, password);
+    public void insert(User user){
+        userrepository.insert(user);
     }
 
+    public boolean exist(String phone, String password){
+        return userrepository.exist(phone, password);
+    }
+
+    public boolean exist(String phone){
+        return userrepository.exist(phone);
+    }
 }

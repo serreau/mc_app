@@ -1,4 +1,4 @@
-package sero.com.ui.fragment.detailJob;
+package sero.com.ui.detailJob;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

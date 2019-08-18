@@ -1,4 +1,4 @@
-package sero.com.ui.fragment.dashboard;
+package sero.com.ui.dashboard;
 
 import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.navigation.Navigation;

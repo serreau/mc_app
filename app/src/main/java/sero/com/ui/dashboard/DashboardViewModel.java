@@ -1,4 +1,4 @@
-package sero.com.ui.fragment.dashboard;
+package sero.com.ui.dashboard;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -6,7 +6,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Transformations;
 import android.net.Uri;
 
-import sero.com.Factories.RepositoryFactory;
+import sero.com.data.Factories.RepositoryFactory;
 import sero.com.data.entities.User;
 import sero.com.data.repositories.DashboardRepository;
 import sero.com.util.LoginManager;
@@ -16,11 +16,6 @@ public class DashboardViewModel extends AndroidViewModel {
     DashboardRepository dashboardrepository;
     String login;
     LiveData<User> user;
-    LiveData<String> phone;
-    LiveData<String> mail;
-    LiveData<String> firstname;
-    LiveData<String> lastname;
-    LiveData<String> password;
     LiveData<String> image;
 
 

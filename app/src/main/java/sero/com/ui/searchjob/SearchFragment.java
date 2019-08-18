@@ -1,4 +1,4 @@
-package sero.com.ui.fragment.searchjob;
+package sero.com.ui.searchjob;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -27,7 +27,7 @@ import sero.com.data.entities.Job;
 import sero.com.ui.R;
 import sero.com.ui.adapter.JobAdapter;
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment{
     SearchViewModel searchviewmodel;
 
     @BindView(R.id.action_button) FloatingActionButton action_button;
@@ -35,9 +35,8 @@ public class SearchFragment extends Fragment {
 
     @BindView(R.id.recycler_home) RecyclerView recyclerView;
 
-    @BindView(R.id.goto_dashboard) TextView goto_dashboard;
-
     private JobAdapter mAdapter;
+
 
     List<Job> arraylist;
 
@@ -73,15 +72,7 @@ public class SearchFragment extends Fragment {
                 Navigation.createNavigateOnClickListener(
                         R.id.action_searchFragment_to_createJobFragment
                 ));
-
-
-        goto_dashboard.setOnClickListener( v -> {
-            Navigation.findNavController(view).navigate(R.id.action_searchFragment_to_dashboardFragment);
-        });
-
         return  view;
     }
-
-
 
 }

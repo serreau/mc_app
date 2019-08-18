@@ -1,4 +1,4 @@
-package sero.com.ui.fragment.login;
+package sero.com.ui.login;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;

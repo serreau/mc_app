@@ -1,4 +1,4 @@
-package sero.com.ui.fragment.createjob;
+package sero.com.ui.searchjob;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -8,18 +8,18 @@ import android.arch.lifecycle.Transformations;
 
 import java.util.List;
 
-import sero.com.Factories.RepositoryFactory;
+import sero.com.data.Factories.RepositoryFactory;
 import sero.com.data.entities.Job;
 import sero.com.data.repositories.JobRepository;
 
-public class CreateJobViewModel extends AndroidViewModel {
+public class SearchViewModel extends AndroidViewModel {
 
     JobRepository jobrepository;
     MutableLiveData<String> search;
     LiveData<List<Job>> jobsbysearch;
 
 
-    public CreateJobViewModel(Application application) {
+    public SearchViewModel(Application application) {
         super(application);
         //executor = new Executors.newSingleThreadExecutor();
         if(jobrepository == null)
@@ -49,5 +49,9 @@ public class CreateJobViewModel extends AndroidViewModel {
     public LiveData<List<Job>> get(){
         return jobrepository.get();
     }
+
+    public LiveData<List<Job>> contains(String search){ return jobsbysearch; }
+
+    public void setSearch(String text){ search.setValue(text); }
 
 }

@@ -1,4 +1,4 @@
-package sero.com.ui.fragment.signup;
+package sero.com.ui.signup;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -81,9 +81,6 @@ public class SignupFragment extends Fragment  implements  Validator.ValidationLi
 
         validator = new Validator(this);
         validator.setValidationListener(this);
-
-        //login_input.setText(getArguments().getString("login", ""));
-        //password_input.setText(getArguments().getString("password", ""));
 
         createListeners(view);
         return view;

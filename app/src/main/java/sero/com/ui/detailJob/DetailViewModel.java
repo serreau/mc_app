@@ -1,4 +1,4 @@
-package sero.com.ui.fragment.detailJob;
+package sero.com.ui.detailJob;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -8,7 +8,7 @@ import android.arch.lifecycle.Transformations;
 
 import java.util.List;
 
-import sero.com.Factories.RepositoryFactory;
+import sero.com.data.Factories.RepositoryFactory;
 import sero.com.data.entities.Job;
 import sero.com.data.repositories.JobRepository;
 

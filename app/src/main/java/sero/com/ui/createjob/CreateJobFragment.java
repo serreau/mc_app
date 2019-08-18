@@ -1,4 +1,4 @@
-package sero.com.ui.fragment.createjob;
+package sero.com.ui.createjob;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
