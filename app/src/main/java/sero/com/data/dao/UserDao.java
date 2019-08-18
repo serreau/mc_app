@@ -1,6 +1,7 @@
 package sero.com.data.dao;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -25,7 +26,7 @@ public interface UserDao {
     void update(User user);
 
     @Query("SELECT * FROM User WHERE phone = (:phone)")
-    User get(String phone);
+    LiveData<User> get(String phone);
 
     @Query("SELECT * FROM User")
     LiveData<List<User>> get();

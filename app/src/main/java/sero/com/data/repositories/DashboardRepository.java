@@ -1,6 +1,7 @@
 package sero.com.data.repositories;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.net.Uri;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface DashboardRepository{
     void insert(User user);
     void delete(User user);
     void update(User user);
-    User get(String id);
+    LiveData<User> get(String id);
     LiveData<List<User>> get();
 
     boolean exist(String phone, String password);

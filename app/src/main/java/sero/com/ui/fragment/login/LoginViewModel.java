@@ -2,9 +2,6 @@ package sero.com.ui.fragment.login;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.Transformations;
 
 import sero.com.Factories.RepositoryFactory;
 import sero.com.data.entities.User;
@@ -22,8 +19,7 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     public void login(String login){
-        User user = userrepository.get(login);
-        LoginManager.login(user, getApplication());
+        LoginManager.login(login, getApplication());
     }
 
     public boolean exist(String login, String password){

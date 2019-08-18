@@ -21,8 +21,7 @@ public class SignupViewModel extends AndroidViewModel {
     }
 
     public void login(String login){
-        User user = userrepository.get(login);
-        LoginManager.login(user, getApplication());
+        LoginManager.login(login, getApplication());
     }
 
     public void insert(User user){

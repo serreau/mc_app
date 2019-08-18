@@ -38,7 +38,7 @@ public class DashboardRepository_Room implements DashboardRepository {
     }
 
     @Override
-    public User get(String id) {
+    public LiveData<User> get(String id) {
         return userdao.get(id);
     }
 

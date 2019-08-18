@@ -11,7 +11,7 @@ public interface UserRepository{
     void insert(User user);
     void delete(User user);
     void update(User user);
-    User get(String id);
+    LiveData<User> get(String id);
     LiveData<List<User>> get();
 
     boolean exist(String phone, String password);

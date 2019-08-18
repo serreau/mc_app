@@ -3,7 +3,6 @@ package sero.com.ui.fragment.dashboard;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Transformations;
 import android.net.Uri;
 
@@ -16,7 +15,7 @@ public class DashboardViewModel extends AndroidViewModel {
 
     DashboardRepository dashboardrepository;
     String login;
-    MutableLiveData<User> user;
+    LiveData<User> user;
     LiveData<String> phone;
     LiveData<String> mail;
     LiveData<String> firstname;
@@ -28,14 +27,13 @@ public class DashboardViewModel extends AndroidViewModel {
     public DashboardViewModel(Application application) {
         super(application);
 
-        login = LoginManager.getUser(application).getPhone();
+        login = LoginManager.getSp(application).getString("login", "error");
 
         if(dashboardrepository == null)
             dashboardrepository = RepositoryFactory.getDashboardRepository(application);
 
         if(user == null)
-            user = new MutableLiveData<>();
-        user.setValue(dashboardrepository.get(LoginManager.getUser(application).getPhone()));
+            user = dashboardrepository.get(login);
         if(phone == null)
             phone = Transformations.map(user, user -> user.getPhone());
         if(mail == null)
@@ -50,12 +48,11 @@ public class DashboardViewModel extends AndroidViewModel {
             image = Transformations.map(user, user -> user.getImage());
     }
 
-    public MutableLiveData<User> getUser() {
+    public LiveData<User> getUser() {
         return user;
     }
 
     public void updateUser(User user) {
-        this.user.setValue(user);
         dashboardrepository.update(user);
     }
 

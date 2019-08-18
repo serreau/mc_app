@@ -1,8 +1,7 @@
-package sero.com.ui.fragment;
+package sero.com.ui.fragment.searchjob;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -12,28 +11,24 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.navigation.Navigation;
-import androidx.navigation.Navigator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import sero.com.ui.viewmodel.JobViewModel;
 import sero.com.data.entities.Job;
 import sero.com.ui.R;
 import sero.com.ui.adapter.JobAdapter;
-import sero.com.util.LoginManager;
 
 public class SearchFragment extends Fragment {
-    JobViewModel jobviewmodel;
+    SearchViewModel searchviewmodel;
 
     @BindView(R.id.action_button) FloatingActionButton action_button;
     @BindView(R.id.textedit_home) TextInputEditText searchjob_input;
@@ -57,8 +52,8 @@ public class SearchFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mAdapter);
 
-        jobviewmodel = ViewModelProviders.of(getActivity()).get(JobViewModel.class);
-        jobviewmodel.contains(searchjob_input.getText().toString()).observe(
+        searchviewmodel = ViewModelProviders.of(getActivity()).get(SearchViewModel.class);
+        searchviewmodel.contains(searchjob_input.getText().toString()).observe(
                 this, jobs -> mAdapter.setJobs(jobs));
 
         searchjob_input.addTextChangedListener(new TextWatcher() {
@@ -70,7 +65,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                jobviewmodel.setSearch(editable.toString());
+                searchviewmodel.setSearch(editable.toString());
             }
         });
 

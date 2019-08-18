@@ -1,4 +1,4 @@
-package sero.com.ui.fragment;
+package sero.com.ui.fragment.createjob;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -13,16 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.navigation.Navigation;
-import androidx.navigation.Navigator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import sero.com.ui.viewmodel.JobViewModel;
 import sero.com.data.entities.Job;
 import sero.com.ui.R;
 
 public class CreateJobFragment extends Fragment {
-    JobViewModel jobviewmodel;
+    CreateJobViewModel createviewmodel;
 
     @BindView(R.id.action_button) FloatingActionButton action_button;
 
@@ -38,7 +36,7 @@ public class CreateJobFragment extends Fragment {
         View view = inflater.inflate(R.layout.createjob_fragment, container, false);
         ButterKnife.bind(this, view);
 
-        jobviewmodel = ViewModelProviders.of(getActivity()).get(JobViewModel.class);
+        createviewmodel = ViewModelProviders.of(getActivity()).get(CreateJobViewModel.class);
 
         title1.setOnFocusChangeListener(
                 (v,hasFocus) -> title1_inputlayout.setError(null));
@@ -51,7 +49,7 @@ public class CreateJobFragment extends Fragment {
             newjob.setTitle2(title2.getText().toString());
 
             if(!newjob.getTitle1().isEmpty() && !newjob.getTitle2().isEmpty()) {
-                jobviewmodel.insert(newjob);
+                createviewmodel.insert(newjob);
                 Navigation.findNavController(view).popBackStack();
             }
 

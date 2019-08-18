@@ -62,9 +62,6 @@ public class LoginFragment extends Fragment  implements  Validator.ValidationLis
         validator = new Validator(this);
         validator.setValidationListener(this);
 
-        //login_input.setText(getArguments().getString("login", ""));
-        //password_input.setText(getArguments().getString("password", ""));
-
         createListeners(view);
         return view;
     }

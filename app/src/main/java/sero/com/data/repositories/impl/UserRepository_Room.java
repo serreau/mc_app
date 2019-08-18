@@ -35,7 +35,7 @@ public class UserRepository_Room implements UserRepository {
     }
 
     @Override
-    public User get(String id) {
+    public LiveData<User> get(String id) {
         return userdao.get(id);
     }
 

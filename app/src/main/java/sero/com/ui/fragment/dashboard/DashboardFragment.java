@@ -111,6 +111,7 @@ public class DashboardFragment extends Fragment implements  Validator.Validation
             lastname_input.setText(user.getLastname());
             password_input.setText(user.getPassword());
             passwordconfirmation_input.setText(user.getPassword());
+
             Picasso.get()
                     .load(user.getImage())
                     .error(R.drawable.default_icon)
@@ -135,8 +136,7 @@ public class DashboardFragment extends Fragment implements  Validator.Validation
 
     @Override
     public void onValidationSucceeded() {
-        User u = LoginManager.getUser(getContext());
-        u.setPhone(getText(login_input));
+        User u = viewmodel.getUser().getValue();
         u.setPassword(getText(password_input));
         u.setMail(getText(mail_input));
         u.setFirstname(getText(firstname_input));
@@ -164,6 +164,7 @@ public class DashboardFragment extends Fragment implements  Validator.Validation
 
         if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
             viewmodel.setImage(data.getData());
+
             Picasso.get()
                     .load(data.getData())
                     .error(R.drawable.default_icon)
