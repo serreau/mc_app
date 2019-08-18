@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.navigation.Navigation;
@@ -152,6 +153,7 @@ public class DashboardFragment extends Fragment implements  Validator.Validation
             TextInputLayout input_layout = (TextInputLayout) error.getView().getParent().getParent();
             String message = error.getCollatedErrorMessage(this.getContext());
             input_layout.setError(message);
+            input_layout.getEditText().setOnFocusChangeListener((view1, b) -> input_layout.setError(null));
         }
     }
 

@@ -34,16 +34,6 @@ public class DashboardViewModel extends AndroidViewModel {
 
         if(user == null)
             user = dashboardrepository.get(login);
-        if(phone == null)
-            phone = Transformations.map(user, user -> user.getPhone());
-        if(mail == null)
-            mail = Transformations.map(user, user -> user.getMail());
-        if(firstname == null)
-            firstname = Transformations.map(user, user -> user.getFirstname());
-        if(lastname == null)
-            lastname = Transformations.map(user, user -> user.getLastname());
-        if(password == null)
-            password = Transformations.map(user, user -> user.getPassword());
         if(image == null)
             image = Transformations.map(user, user -> user.getImage());
     }
