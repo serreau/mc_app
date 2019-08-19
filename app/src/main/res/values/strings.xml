@@ -7,6 +7,5 @@
     <string name="error">Une erreur est survenue</string>
     <string name="pattern_error">Ce format est incorrect</string>
 
-    <string name="title1">En tant que </string>
-    <string name="title2">je veux </string>
+    <string name="Name">veux</string>
 </resources>

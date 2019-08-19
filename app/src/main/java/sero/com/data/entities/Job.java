@@ -7,8 +7,9 @@ import android.arch.persistence.room.PrimaryKey;
 public class Job {
     @PrimaryKey(autoGenerate = true)
     private long id;
-    private String title1;
-    private String title2;
+    private String owner;
+    private String name;
+    private String state;
 
     public long getId() {
         return id;
@@ -18,24 +19,32 @@ public class Job {
         this.id = id;
     }
 
-    public String getTitle1() {
-        return title1;
+    public String getOwner() {
+        return owner;
     }
 
-    public void setTitle1(String title1) {
-        this.title1 = title1;
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
-    public String getTitle2() {
-        return title2;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle2(String title2) {
-        this.title2 = title2;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     @Override
     public String toString() {
-        return "id : "+id+", title1 : "+title1+", title2 : "+title2;
+        return "id : "+id+", owner : "+owner+", name : "+name;
     }
 }

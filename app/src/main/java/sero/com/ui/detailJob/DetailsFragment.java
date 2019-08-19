@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 import sero.com.ui.R;
 
 public class DetailsFragment extends Fragment {
-        @BindView(R.id.title_card) TextView title_text;
+        @BindView(R.id.name_card) TextView name_text;
 
     @Nullable
     @Override
@@ -22,7 +22,7 @@ public class DetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.detailsjob_fragment, container, false);
         ButterKnife.bind(this, view);
 
-        title_text.setText(getArguments().getString("title", getString(R.string.error)));
+        name_text.setText(getArguments().getString("name", getString(R.string.error)));
 
         return  view;
     }

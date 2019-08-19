@@ -25,8 +25,8 @@ public interface JobDao {
     @Query("SELECT * FROM Job WHERE id = (:id)")
     LiveData<Job> get(long id);
 
-    @Query("SELECT * FROM Job WHERE title1 || ' ' || title2 LIKE '%' || :title || '%'")
-    LiveData<List<Job>> contains(String title);
+    @Query("SELECT * FROM Job WHERE state = :state AND owner || ' ' || name LIKE '%' || :search || '%'")
+    LiveData<List<Job>> getByStateAndSearch(String state, String search);
 
     @Query("SELECT * FROM Job")
     LiveData<List<Job>> get();

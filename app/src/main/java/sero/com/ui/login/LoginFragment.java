@@ -89,7 +89,7 @@ public class LoginFragment extends Fragment  implements  Validator.ValidationLis
 
         if(loginviewmodel.exist(login, password)){
             loginviewmodel.login(login);
-            Navigation.findNavController(this.getView()).navigate(R.id.action_loginFragment_to_searchFragment);
+            Navigation.findNavController(this.getView()).navigate(R.id.action_loginFragment_to_kanbanViewPager);
         } else {
             login_layout.setError("Login inconnu ou mot de passe incorrect");
         }
@@ -112,6 +112,6 @@ public class LoginFragment extends Fragment  implements  Validator.ValidationLis
     public void onStart() {
         super.onStart();
         if(LoginManager.isConnected(getContext()))
-            Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_searchFragment);
+            Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_kanbanViewPager);
     }
 }

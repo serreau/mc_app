@@ -20,9 +20,6 @@ import sero.com.ui.R;
 public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     public List<Job> jobs;
 
-    @BindString(R.string.title1) String title1;
-    @BindString(R.string.title2) String title2;
-
     public JobAdapter(Context context, List<Job> jobs) {
         this.jobs = jobs;
     }
@@ -35,8 +32,8 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         JobViewHolder jobviewholder = new JobViewHolder(view);
         view.setOnClickListener( v -> {
             Bundle b = new Bundle();
-            b.putString("title", jobviewholder.getTitle());
-            Navigation.findNavController(view).navigate(R.id.action_searchFragment_to_detailsFragment, b);
+            b.putString("name", jobviewholder.getName());
+            Navigation.findNavController(view).navigate(R.id.action_kanbanViewPager_to_detailsFragment, b);
         });
 
         return jobviewholder;
@@ -44,7 +41,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
 
     @Override
     public void onBindViewHolder(JobViewHolder holder, int position) {
-        holder.setTitle(title1+" "+jobs.get(position).getTitle1()+" "+title2+" "+jobs.get(position).getTitle2());
+        holder.setName(jobs.get(position).getOwner()+" veut "+jobs.get(position).getName());
     }
 
     @Override
@@ -58,18 +55,18 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     }
 
     public static class JobViewHolder extends RecyclerView.ViewHolder {
-        public TextView title;
+        public TextView name;
 
         public JobViewHolder(View view) {
             super(view);
-            title = view.findViewById(R.id.title_card);
+            name = view.findViewById(R.id.name_card);
         }
 
-        public void setTitle(String text) {
-            this.title.setText(text);
+        public void setName(String text) {
+            this.name.setText(text);
         }
-        public String getTitle() {
-            return this.title.getText().toString();
+        public String getName() {
+            return this.name.getText().toString();
         }
     }
 }

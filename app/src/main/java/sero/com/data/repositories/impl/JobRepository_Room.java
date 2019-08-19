@@ -43,8 +43,8 @@ public class JobRepository_Room implements JobRepository {
     public LiveData<List<Job>> get() { return jobdao.get(); }
 
     @Override
-    public LiveData<List<Job>> contains(String search) {
-        return jobdao.contains(search);
+    public LiveData<List<Job>> getByStateAndSearch(String state, String search) {
+        return jobdao.getByStateAndSearch(state, search);
     }
 
 }

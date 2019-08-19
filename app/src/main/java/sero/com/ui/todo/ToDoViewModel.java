@@ -1,4 +1,4 @@
-package sero.com.ui.searchjob;
+package sero.com.ui.todo;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -11,15 +11,16 @@ import java.util.List;
 import sero.com.data.Factories.RepositoryFactory;
 import sero.com.data.entities.Job;
 import sero.com.data.repositories.JobRepository;
+import sero.com.util.State;
 
-public class SearchViewModel extends AndroidViewModel {
+public class ToDoViewModel extends AndroidViewModel {
 
     JobRepository jobrepository;
     MutableLiveData<String> search;
     LiveData<List<Job>> jobsbysearch;
 
 
-    public SearchViewModel(Application application) {
+    public ToDoViewModel(Application application) {
         super(application);
         //executor = new Executors.newSingleThreadExecutor();
         if(jobrepository == null)
@@ -27,7 +28,7 @@ public class SearchViewModel extends AndroidViewModel {
         if(search == null)
             search = new MutableLiveData();
         if(jobsbysearch == null)
-            jobsbysearch = Transformations.switchMap(search, search -> jobrepository.contains(search));
+            jobsbysearch = Transformations.switchMap(search, search -> jobrepository.getByStateAndSearch(State.TODO.toString(), search));
     }
 
     public void insert(Job job){
@@ -50,7 +51,7 @@ public class SearchViewModel extends AndroidViewModel {
         return jobrepository.get();
     }
 
-    public LiveData<List<Job>> contains(String search){ return jobsbysearch; }
+    public LiveData<List<Job>> searchResult(){ return jobsbysearch; }
 
     public void setSearch(String text){ search.setValue(text); }
 

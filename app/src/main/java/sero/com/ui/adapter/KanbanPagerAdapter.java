@@ -5,7 +5,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import sero.com.ui.dashboard.DashboardFragment;
-import sero.com.ui.searchjob.SearchFragment;
+import sero.com.ui.done.DoneFragment;
+import sero.com.ui.inprogress.InProgressFragment;
+import sero.com.ui.todo.ToDoFragment;
 
 public class KanbanPagerAdapter extends FragmentPagerAdapter {
 
@@ -25,14 +27,18 @@ public class KanbanPagerAdapter extends FragmentPagerAdapter {
             case 0 :
                 return new DashboardFragment();
             case 1 :
-                return new SearchFragment();
+                return new ToDoFragment();
             case 2 :
-                return new SearchFragment();
+                return new InProgressFragment();
             case 3 :
-                return new SearchFragment();
+                return new DoneFragment();
             default:
                 return null;
         }
 
+    }
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
     }
 }

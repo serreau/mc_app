@@ -17,8 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
         PermissionManager.verifyStoragePermissions(this);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new KanbanPagerAdapter(getSupportFragmentManager()));
+
     }
 
 

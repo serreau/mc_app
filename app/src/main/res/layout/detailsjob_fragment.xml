@@ -21,7 +21,7 @@
             android:orientation="horizontal"
             android:layout_marginLeft="100dp">
             <TextView
-                android:id="@+id/title_card"
+                android:id="@+id/name_card"
                 android:layout_width="wrap_content"
                 android:layout_height="150dp"
                 android:gravity="center|start"

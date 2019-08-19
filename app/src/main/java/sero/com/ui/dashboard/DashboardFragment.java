@@ -125,7 +125,7 @@ public class DashboardFragment extends Fragment implements  Validator.Validation
 
         goto_logout.setOnClickListener( v -> {
             LoginManager.logout(getContext());
-            Navigation.findNavController(view).navigate(R.id.action_dashboardFragment_to_loginFragment);
+            Navigation.findNavController(view).navigate(R.id.action_kanbanViewPager_to_loginFragment);
         });
 
         login_input.setOnFocusChangeListener((view1, b) -> login_layout.setError(null));

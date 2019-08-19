@@ -18,17 +18,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import sero.com.data.entities.Job;
 import sero.com.ui.R;
+import sero.com.util.State;
 
 public class CreateJobFragment extends Fragment {
     CreateJobViewModel createviewmodel;
 
     @BindView(R.id.action_button) FloatingActionButton action_button;
 
-    @BindView(R.id.job_1_input) TextInputEditText title1;
-    @BindView(R.id.job_2_input) TextInputEditText title2;
+    @BindView(R.id.job_1_input) TextInputEditText owner;
+    @BindView(R.id.job_2_input) TextInputEditText name;
 
-    @BindView(R.id.job_1_layout) TextInputLayout title1_inputlayout;
-    @BindView(R.id.job_2_layout) TextInputLayout title2_inputlayout;
+    @BindView(R.id.job_1_layout) TextInputLayout owner_inputlayout;
+    @BindView(R.id.job_2_layout) TextInputLayout name_inputlayout;
 
     @Nullable
     @Override
@@ -38,25 +39,26 @@ public class CreateJobFragment extends Fragment {
 
         createviewmodel = ViewModelProviders.of(getActivity()).get(CreateJobViewModel.class);
 
-        title1.setOnFocusChangeListener(
-                (v,hasFocus) -> title1_inputlayout.setError(null));
-        title2.setOnFocusChangeListener(
-                (v,hasFocus) ->  title2_inputlayout.setError(null));
+        owner.setOnFocusChangeListener(
+                (v,hasFocus) -> owner_inputlayout.setError(null));
+        name.setOnFocusChangeListener(
+                (v,hasFocus) ->  name_inputlayout.setError(null));
 
         action_button.setOnClickListener( (v) -> {
             Job newjob = new Job();
-            newjob.setTitle1(title1.getText().toString());
-            newjob.setTitle2(title2.getText().toString());
+            newjob.setOwner(owner.getText().toString());
+            newjob.setName(name.getText().toString());
+            newjob.setState(State.TODO.toString());
 
-            if(!newjob.getTitle1().isEmpty() && !newjob.getTitle2().isEmpty()) {
+            if(!newjob.getOwner().isEmpty() && !newjob.getName().isEmpty()) {
                 createviewmodel.insert(newjob);
                 Navigation.findNavController(view).popBackStack();
             }
 
-            if (newjob.getTitle1().isEmpty())
-                title1_inputlayout.setError(getString(R.string.fieldrequired_error));
-            if (newjob.getTitle2().isEmpty())
-                title2_inputlayout.setError(getString(R.string.fieldrequired_error));
+            if (newjob.getOwner().isEmpty())
+                owner_inputlayout.setError(getString(R.string.fieldrequired_error));
+            if (newjob.getName().isEmpty())
+                name_inputlayout.setError(getString(R.string.fieldrequired_error));
 
         });
 

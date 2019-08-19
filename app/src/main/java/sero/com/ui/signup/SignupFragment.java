@@ -115,7 +115,10 @@ public class SignupFragment extends Fragment  implements  Validator.ValidationLi
         if(!viewmodel.exist(getText(login_input), getText(password_input))){
             viewmodel.insert(u);
             viewmodel.login(getText(login_input));
-            Navigation.findNavController(this.getView()).navigate(R.id.action_signupFragment_to_searchFragment);
+            Toast.makeText(getContext(), "L'inscription est ok", Toast.LENGTH_SHORT).show();
+
+            Navigation.findNavController(this.getView()).navigate(R.id.action_signupFragment_to_loginFragment);
+
         } else if (viewmodel.exist(getText(login_input))){
             login_layout.setError("Ce compte existe déjà");
         } else {
