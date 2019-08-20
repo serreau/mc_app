@@ -46,5 +46,12 @@
         <action
             android:id="@+id/action_kanbanViewPager_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_kanbanViewPager_to_kanbansFragment"
+            app:destination="@id/kanbansFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/kanbansFragment"
+        android:name="sero.com.ui.kanbans.KanbansFragment"
+        android:label="KanbansFragment" />
 </navigation>

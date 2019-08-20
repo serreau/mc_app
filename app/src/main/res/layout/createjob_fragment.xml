@@ -17,7 +17,7 @@
             android:id="@+id/job_1_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="En tant que"/>
+            android:hint="Auteur(s)"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -30,7 +30,7 @@
             android:id="@+id/job_2_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Je veux"/>
+            android:hint="Besoin"/>
     </android.support.design.widget.TextInputLayout>
 
     <FrameLayout

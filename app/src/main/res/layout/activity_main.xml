@@ -9,7 +9,6 @@
     android:fitsSystemWindows="true"
     android:id="@+id/framelayout_home">
 
-
     <fragment
         android:id="@+id/navHost"
         android:layout_width="match_parent"
