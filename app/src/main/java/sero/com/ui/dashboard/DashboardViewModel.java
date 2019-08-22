@@ -9,7 +9,7 @@ import android.net.Uri;
 import sero.com.data.Factories.RepositoryFactory;
 import sero.com.data.entities.User;
 import sero.com.data.repositories.DashboardRepository;
-import sero.com.util.LoginManager;
+import sero.com.util.SharedPreferencesHelper;
 
 public class DashboardViewModel extends AndroidViewModel {
 
@@ -22,7 +22,7 @@ public class DashboardViewModel extends AndroidViewModel {
     public DashboardViewModel(Application application) {
         super(application);
 
-        login = LoginManager.getSp(application).getString("login", "error");
+        login = SharedPreferencesHelper.getSp(application).getString("login", "error");
 
         if(dashboardrepository == null)
             dashboardrepository = RepositoryFactory.getDashboardRepository(application);

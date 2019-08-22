@@ -24,7 +24,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sero.com.ui.R;
-import sero.com.util.LoginManager;
+import sero.com.util.SharedPreferencesHelper;
 
 public class LoginFragment extends Fragment  implements  Validator.ValidationListener{
     private LoginViewModel loginviewmodel;
@@ -111,7 +111,7 @@ public class LoginFragment extends Fragment  implements  Validator.ValidationLis
     @Override
     public void onStart() {
         super.onStart();
-        if(LoginManager.isConnected(getContext()))
+        if(SharedPreferencesHelper.isConnected(getContext()))
             Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_kanbanViewPager);
     }
 }

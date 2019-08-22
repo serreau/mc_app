@@ -51,4 +51,14 @@ public class UserRepository_Room implements UserRepository {
     public boolean exist(String phone) {
         return userdao.exist(phone);
     }
+
+    @Override
+    public LiveData<String> getFirstname(String phone) {
+        return userdao.getFirstname(phone);
+    }
+
+    @Override
+    public LiveData<List<User>> get(String[] logins) {
+        return userdao.get(logins);
+    }
 }

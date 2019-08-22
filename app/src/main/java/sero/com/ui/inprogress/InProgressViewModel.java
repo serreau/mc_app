@@ -28,7 +28,7 @@ public class InProgressViewModel extends AndroidViewModel {
         if(search == null)
             search = new MutableLiveData();
         if(jobsbysearch == null)
-            jobsbysearch = Transformations.switchMap(search, search -> jobrepository.getByStateAndSearch(State.INPROGRESS.toString(), search));
+            jobsbysearch = Transformations.switchMap(search, search -> jobrepository.getByStateSearch(State.INPROGRESS.toString(), search));
     }
 
     public void insert(Job job){

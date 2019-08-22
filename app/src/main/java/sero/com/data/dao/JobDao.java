@@ -10,6 +10,7 @@ import android.arch.persistence.room.Update;
 import java.util.List;
 
 import sero.com.data.entities.Job;
+import sero.com.data.entities.User;
 
 @Dao
 public interface JobDao {
@@ -25,9 +26,12 @@ public interface JobDao {
     @Query("SELECT * FROM Job WHERE id = (:id)")
     LiveData<Job> get(long id);
 
-    @Query("SELECT * FROM Job WHERE state = :state AND owner || ' ' || name LIKE '%' || :search || '%'")
-    LiveData<List<Job>> getByStateAndSearch(String state, String search);
-
     @Query("SELECT * FROM Job")
     LiveData<List<Job>> get();
+
+    @Query("SELECT * FROM Job WHERE state = :state AND owner || ' ' || name LIKE '%' || :search || '%'")
+    LiveData<List<Job>> getByStateSearch(String state, String search);
+
+    @Query("SELECT * FROM Job WHERE owner = :owner AND state = :state AND name LIKE '%' || :search || '%'")
+    LiveData<List<Job>> getByOwnerStateSearch(String owner, String state, String search);
 }

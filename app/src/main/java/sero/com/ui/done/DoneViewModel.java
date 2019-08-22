@@ -28,7 +28,7 @@ public class DoneViewModel extends AndroidViewModel {
         if(search == null)
             search = new MutableLiveData();
         if(jobsbysearch == null)
-            jobsbysearch = Transformations.switchMap(search, search -> jobrepository.getByStateAndSearch(State.DONE.toString(), search));
+            jobsbysearch = Transformations.switchMap(search, search -> jobrepository.getByStateSearch(State.DONE.toString(), search));
     }
 
     public void insert(Job job){

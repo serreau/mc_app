@@ -6,12 +6,12 @@ import android.net.Uri;
 
 import sero.com.data.entities.User;
 
-public abstract class LoginManager {
+public abstract class SharedPreferencesHelper {
 
     public static void login(String login, Context context){
         getSp(context).edit()
-                .putString("login", ""+login)
-                .commit();
+                .putString("login", login)
+                .apply();
     }
 
     public static void logout(Context context){
@@ -24,6 +24,16 @@ public abstract class LoginManager {
 
     public static SharedPreferences getSp(Context context){
         return context.getSharedPreferences("user", Context.MODE_PRIVATE);
+    }
+
+    public static void setKanban(String kanban, Context context){
+        getSp(context).edit()
+                .putString("kanban", kanban)
+                .apply();
+    }
+
+    public static String  getKanban(Context context){
+        return getSp(context).getString("kanban", "public");
     }
 
 }

@@ -27,13 +27,9 @@ public class InProgressFragment extends Fragment{
     InProgressViewModel searchviewmodel;
 
     @BindView(R.id.textedit_home) TextInputEditText searchjob_input;
-
     @BindView(R.id.recycler_home) RecyclerView recyclerView;
 
     private JobAdapter mAdapter;
-
-
-    List<Job> arraylist;
 
     @Nullable
     @Override
@@ -41,8 +37,7 @@ public class InProgressFragment extends Fragment{
         View view = inflater.inflate(R.layout.inprogress_fragment, container, false);
         ButterKnife.bind(this, view);
 
-        arraylist = new ArrayList<>();
-        mAdapter = new JobAdapter(getContext(), arraylist);
+        mAdapter = new JobAdapter(new ArrayList<>(), new ArrayList<>());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mAdapter);
 

@@ -5,7 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 
 import sero.com.data.Factories.RepositoryFactory;
 import sero.com.data.repositories.UserRepository;
-import sero.com.util.LoginManager;
+import sero.com.util.SharedPreferencesHelper;
 
 public class LoginViewModel extends AndroidViewModel {
 
@@ -18,7 +18,7 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     public void login(String login){
-        LoginManager.login(login, getApplication());
+        SharedPreferencesHelper.login(login, getApplication());
     }
 
     public boolean exist(String login, String password){

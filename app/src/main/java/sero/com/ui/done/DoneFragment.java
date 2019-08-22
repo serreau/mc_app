@@ -15,11 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import sero.com.data.entities.Job;
 import sero.com.ui.R;
 import sero.com.ui.adapter.JobAdapter;
 
@@ -32,17 +30,13 @@ public class DoneFragment extends Fragment{
 
     private JobAdapter mAdapter;
 
-
-    List<Job> arraylist;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.done_fragment, container, false);
         ButterKnife.bind(this, view);
 
-        arraylist = new ArrayList<>();
-        mAdapter = new JobAdapter(getContext(), arraylist);
+        mAdapter = new JobAdapter(new ArrayList<>(), new ArrayList<>());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mAdapter);
 

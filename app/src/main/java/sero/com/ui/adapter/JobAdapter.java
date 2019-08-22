@@ -1,6 +1,5 @@
 package sero.com.ui.adapter;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,17 +10,21 @@ import android.widget.TextView;
 import androidx.navigation.Navigation;
 
 import java.util.List;
+import java.util.ListIterator;
 
-import butterknife.BindString;
 import butterknife.ButterKnife;
 import sero.com.data.entities.Job;
+import sero.com.data.entities.User;
 import sero.com.ui.R;
 
 public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     public List<Job> jobs;
+    public List<User> users;
 
-    public JobAdapter(Context context, List<Job> jobs) {
+
+    public JobAdapter(List<Job> jobs, List<User> users) {
         this.jobs = jobs;
+        this.users = users;
     }
 
     @Override
@@ -41,7 +44,22 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
 
     @Override
     public void onBindViewHolder(JobViewHolder holder, int position) {
-        holder.setName(jobs.get(position).getOwner()+" veut "+jobs.get(position).getName());
+        Job job = jobs.get(position);
+        String jobname = job.getName();
+        String userfirstname = getUserFirstname(job);
+
+
+        holder.setName(userfirstname+" veut "+jobname);
+    }
+
+    private String getUserFirstname(Job job) {
+        ListIterator<User> it = users.listIterator();
+        while (it.hasNext()){
+            User user = it.next();
+            if(job.getOwner().equals(user.getPhone()))
+                return user.getFirstname();
+        }
+        return "";
     }
 
     @Override
@@ -51,6 +69,11 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
 
     public void setJobs(List<Job> jobs){
         this.jobs = jobs;
+        notifyDataSetChanged();
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
         notifyDataSetChanged();
     }
 
@@ -69,4 +92,6 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
             return this.name.getText().toString();
         }
     }
+
+
 }

@@ -13,7 +13,9 @@ public interface UserRepository{
     void update(User user);
     LiveData<User> get(String id);
     LiveData<List<User>> get();
+    LiveData<List<User>> get(String[] logins);
 
     boolean exist(String phone, String password);
     boolean exist(String phone);
+    LiveData<String> getFirstname(String phone);
 }

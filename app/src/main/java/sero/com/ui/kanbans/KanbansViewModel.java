@@ -7,5 +7,7 @@ public class KanbansViewModel extends AndroidViewModel {
 
     public KanbansViewModel(Application application) {
         super(application);
+
+
     }
 }

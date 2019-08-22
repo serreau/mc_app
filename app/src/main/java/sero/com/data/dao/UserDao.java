@@ -39,4 +39,10 @@ public interface UserDao {
 
     @Query("UPDATE User SET image = :image WHERE phone = :login")
     void updateImage(String login, String image);
+
+    @Query("SELECT firstname FROM User WHERE phone = (:phone)" )
+    LiveData<String> getFirstname(String phone);
+
+    @Query("SELECT * FROM user WHERE phone IN(:logins)")
+    LiveData<List<User>> get(String[] logins);
 }

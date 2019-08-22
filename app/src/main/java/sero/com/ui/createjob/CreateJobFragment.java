@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import sero.com.data.entities.Job;
 import sero.com.ui.R;
+import sero.com.util.SharedPreferencesHelper;
 import sero.com.util.State;
 
 public class CreateJobFragment extends Fragment {
@@ -25,11 +26,11 @@ public class CreateJobFragment extends Fragment {
 
     @BindView(R.id.action_button) FloatingActionButton action_button;
 
-    @BindView(R.id.job_1_input) TextInputEditText owner;
-    @BindView(R.id.job_2_input) TextInputEditText name;
+    @BindView(R.id.jobowner_input) TextInputEditText jobowner_input;
+    @BindView(R.id.jobname_input) TextInputEditText jobname_input;
 
-    @BindView(R.id.job_1_layout) TextInputLayout owner_inputlayout;
-    @BindView(R.id.job_2_layout) TextInputLayout name_inputlayout;
+    @BindView(R.id.jobowner_layout) TextInputLayout jobowner_layout;
+    @BindView(R.id.jobname_layout) TextInputLayout jobname_layout;
 
     @Nullable
     @Override
@@ -39,15 +40,17 @@ public class CreateJobFragment extends Fragment {
 
         createviewmodel = ViewModelProviders.of(getActivity()).get(CreateJobViewModel.class);
 
-        owner.setOnFocusChangeListener(
-                (v,hasFocus) -> owner_inputlayout.setError(null));
-        name.setOnFocusChangeListener(
-                (v,hasFocus) ->  name_inputlayout.setError(null));
+        createviewmodel.getFirstname().observe( this, s -> jobowner_input.setText(s));
+
+        jobowner_input.setOnFocusChangeListener(
+                (v,hasFocus) -> jobowner_layout.setError(null));
+        jobname_input.setOnFocusChangeListener(
+                (v,hasFocus) ->  jobname_layout.setError(null));
 
         action_button.setOnClickListener( (v) -> {
             Job newjob = new Job();
-            newjob.setOwner(owner.getText().toString());
-            newjob.setName(name.getText().toString());
+            newjob.setOwner(SharedPreferencesHelper.getSp(getContext()).getString("login", "error"));
+            newjob.setName(jobname_input.getText().toString());
             newjob.setState(State.TODO.toString());
 
             if(!newjob.getOwner().isEmpty() && !newjob.getName().isEmpty()) {
@@ -56,9 +59,9 @@ public class CreateJobFragment extends Fragment {
             }
 
             if (newjob.getOwner().isEmpty())
-                owner_inputlayout.setError(getString(R.string.fieldrequired_error));
+                jobowner_layout.setError(getString(R.string.fieldrequired_error));
             if (newjob.getName().isEmpty())
-                name_inputlayout.setError(getString(R.string.fieldrequired_error));
+                jobname_layout.setError(getString(R.string.fieldrequired_error));
 
         });
 

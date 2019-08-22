@@ -14,5 +14,6 @@ public interface JobRepository{
     LiveData<Job> get(long id);
     LiveData<List<Job>> get();
 
-    LiveData<List<Job>> getByStateAndSearch(String state, String search);
+    LiveData<List<Job>> getByStateSearch(String toString, String search);
+    LiveData<List<Job>> getByOwnerStateSearch(String owner, String toString, String search);
 }
