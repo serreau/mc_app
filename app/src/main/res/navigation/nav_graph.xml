@@ -11,10 +11,6 @@
         android:label="CreateJobFragment"
         tools:layout="@layout/activity_main"/>
     <fragment
-        android:id="@+id/detailsFragment"
-        android:name="sero.com.ui.detailJob.DetailsFragment"
-        android:label="DetailsFragment" />
-    <fragment
         android:id="@+id/loginFragment"
         android:name="sero.com.ui.login.LoginFragment"
         android:label="LoginFragment" >
@@ -23,7 +19,7 @@
             app:destination="@id/signupFragment" />
         <action
             android:id="@+id/action_loginFragment_to_kanbanViewPager"
-            app:destination="@id/kanbanViewPager" />
+            app:destination="@id/kanbanViewPagerFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -34,28 +30,29 @@
             app:destination="@id/loginFragment" />
     </fragment>
     <fragment
-        android:id="@+id/kanbanViewPager"
+        android:id="@+id/kanbanViewPagerFragment"
         android:name="sero.com.ui.viewpager.KanbanViewPager"
         android:label="KanbanViewPager" >
         <action
-            android:id="@+id/action_kanbanViewPager_to_createJobFragment"
+            android:id="@+id/action_kanbanViewPagerFragment_to_createJobFragment"
             app:destination="@id/createJobFragment" />
         <action
-            android:id="@+id/action_kanbanViewPager_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
-        <action
-            android:id="@+id/action_kanbanViewPager_to_loginFragment"
+            android:id="@+id/action_kanbanViewPagerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_kanbanViewPager_to_kanbansFragment"
+            android:id="@+id/action_kanbanViewPagerFragment_to_kanbansFragment"
             app:destination="@id/kanbansFragment" />
+        <action
+            android:id="@+id/action_kanbanViewPagerFragment_to_detailViewPagerFragment"
+            app:destination="@id/detailViewPagerFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/kanbansFragment"
         android:name="sero.com.ui.kanbans.KanbansFragment"
-        android:label="KanbansFragment" >
-        <action
-            android:id="@+id/action_kanbansFragment_to_kanbanViewPager"
-            app:destination="@id/kanbanViewPager" />
-    </fragment>
+        android:label="KanbansFragment" />
+    <fragment
+        android:id="@+id/detailViewPagerFragment"
+        android:name="sero.com.ui.viewpager.DetailViewPager"
+        android:label="DetailViewPager" />
 </navigation>

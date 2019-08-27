@@ -24,13 +24,18 @@ import sero.com.util.State;
 public class CreateJobFragment extends Fragment {
     CreateJobViewModel createviewmodel;
 
-    @BindView(R.id.action_button) FloatingActionButton action_button;
+    @BindView(R.id.action_button)
+    FloatingActionButton action_button;
 
-    @BindView(R.id.jobowner_input) TextInputEditText jobowner_input;
-    @BindView(R.id.jobname_input) TextInputEditText jobname_input;
+    @BindView(R.id.jobowner_input)
+    TextInputEditText jobowner_input;
+    @BindView(R.id.jobname_input)
+    TextInputEditText jobname_input;
 
-    @BindView(R.id.jobowner_layout) TextInputLayout jobowner_layout;
-    @BindView(R.id.jobname_layout) TextInputLayout jobname_layout;
+    @BindView(R.id.jobowner_layout)
+    TextInputLayout jobowner_layout;
+    @BindView(R.id.jobname_layout)
+    TextInputLayout jobname_layout;
 
     @Nullable
     @Override

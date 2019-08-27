@@ -35,8 +35,8 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         JobViewHolder jobviewholder = new JobViewHolder(view);
         view.setOnClickListener( v -> {
             Bundle b = new Bundle();
-            b.putString("name", jobviewholder.getName());
-            Navigation.findNavController(view).navigate(R.id.action_kanbanViewPager_to_detailsFragment, b);
+            b.putLong("id", jobviewholder.getJob().getId());
+            Navigation.findNavController(view).navigate(R.id.action_kanbanViewPagerFragment_to_detailViewPagerFragment, b);
         });
 
         return jobviewholder;
@@ -45,21 +45,19 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     @Override
     public void onBindViewHolder(JobViewHolder holder, int position) {
         Job job = jobs.get(position);
-        String jobname = job.getName();
-        String userfirstname = getUserFirstname(job);
-
-
-        holder.setName(userfirstname+" veut "+jobname);
+        holder.setJob(job);
+        holder.setUser(getUserByJob(job));
+        holder.setName();
     }
 
-    private String getUserFirstname(Job job) {
+    private User getUserByJob(Job job) {
         ListIterator<User> it = users.listIterator();
         while (it.hasNext()){
             User user = it.next();
             if(job.getOwner().equals(user.getPhone()))
-                return user.getFirstname();
+                return user;
         }
-        return "";
+        return null;
     }
 
     @Override
@@ -79,17 +77,36 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
 
     public static class JobViewHolder extends RecyclerView.ViewHolder {
         public TextView name;
+        private Job job;
+        private User user;
 
         public JobViewHolder(View view) {
             super(view);
             name = view.findViewById(R.id.name_card);
         }
 
-        public void setName(String text) {
-            this.name.setText(text);
+        public void setJob(Job job) {
+            this.job = job;
         }
-        public String getName() {
-            return this.name.getText().toString();
+
+        public Job getJob() {
+            return this.job;
+        }
+
+        public User getUser() {
+            return user;
+        }
+
+        public void setUser(User user) {
+            this.user = user;
+        }
+
+        public void setName(){
+            if(user == null || job == null  ) {
+                name.setText("Informations manquantes");
+                return;
+            }
+            name.setText(user.getFirstname()+" veut "+job.getName());
         }
     }
 

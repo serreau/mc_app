@@ -36,4 +36,8 @@ public abstract class SharedPreferencesHelper {
         return getSp(context).getString("kanban", "public");
     }
 
+    public static String getlogin(Context context){
+        return context.getSharedPreferences("user", Context.MODE_PRIVATE).getString("login", "error_login");
+    }
+
 }

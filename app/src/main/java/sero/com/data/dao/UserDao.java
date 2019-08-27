@@ -45,4 +45,5 @@ public interface UserDao {
 
     @Query("SELECT * FROM user WHERE phone IN(:logins)")
     LiveData<List<User>> get(String[] logins);
+
 }

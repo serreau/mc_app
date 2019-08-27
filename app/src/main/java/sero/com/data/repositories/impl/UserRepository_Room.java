@@ -61,4 +61,5 @@ public class UserRepository_Room implements UserRepository {
     public LiveData<List<User>> get(String[] logins) {
         return userdao.get(logins);
     }
+
 }

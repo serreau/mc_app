@@ -18,4 +18,5 @@ public interface UserRepository{
     boolean exist(String phone, String password);
     boolean exist(String phone);
     LiveData<String> getFirstname(String phone);
+
 }

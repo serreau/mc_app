@@ -4,9 +4,11 @@ import android.content.Context;
 
 import sero.com.data.repositories.DashboardRepository;
 import sero.com.data.repositories.JobRepository;
+import sero.com.data.repositories.OfferRepository;
 import sero.com.data.repositories.UserRepository;
 import sero.com.data.repositories.impl.DashboardRepository_Room;
 import sero.com.data.repositories.impl.JobRepository_Room;
+import sero.com.data.repositories.impl.OfferRepository_Room;
 import sero.com.data.repositories.impl.UserRepository_Room;
 
 public class RepositoryFactory {
@@ -20,5 +22,9 @@ public class RepositoryFactory {
 
     public static DashboardRepository getDashboardRepository(Context context){
         return new DashboardRepository_Room(context);
+    }
+
+    public static OfferRepository getOfferRepository(Context context){
+        return new OfferRepository_Room(context);
     }
 }

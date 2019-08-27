@@ -10,34 +10,26 @@ import android.util.Log;
 import java.security.CryptoPrimitive;
 
 import sero.com.data.dao.JobDao;
+import sero.com.data.dao.OfferDao;
 import sero.com.data.dao.UserDao;
 import sero.com.data.entities.Job;
+import sero.com.data.entities.Offer;
 import sero.com.data.entities.User;
 
-@Database(entities = {Job.class, User.class}, version = 1, exportSchema = false)
+@Database(entities = {Job.class, User.class, Offer.class}, version = 1, exportSchema = false)
 @TypeConverters(Converters.class)
 public abstract class DB extends RoomDatabase {
     private static DB INSTANCE;
 
     public abstract JobDao jobDao();
     public abstract UserDao userDao();
+    public abstract OfferDao offerDao();
 
     public final static synchronized DB getInstance(final Context context) {
         if(INSTANCE == null)
             INSTANCE =  Room.databaseBuilder(context.getApplicationContext(), DB.class, "subapp-db")
                 .allowMainThreadQueries()
                 .build();
-        //populate();
         return INSTANCE;
     }
-
-    private static void populate() {
-        User u = new User();
-        u.setPhone("0777777777");
-        u.setPassword("aaaaaaaa");
-        u.setMail("a@a.a");
-        u.setFirstname("a");
-        INSTANCE.userDao().insert(u);
-    }
-
 }
