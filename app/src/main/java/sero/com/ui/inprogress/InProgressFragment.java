@@ -24,10 +24,10 @@ import sero.com.ui.R;
 import sero.com.ui.adapter.JobAdapter;
 
 public class InProgressFragment extends Fragment{
-    InProgressViewModel searchviewmodel;
+    InProgressViewModel viewModel;
 
-    @BindView(R.id.textedit_home) TextInputEditText searchjob_input;
-    @BindView(R.id.recycler_home) RecyclerView recyclerView;
+    @BindView(R.id.searchInput) TextInputEditText searchJobInput;
+    @BindView(R.id.recyclerView) RecyclerView recyclerView;
 
     private JobAdapter mAdapter;
 
@@ -41,11 +41,11 @@ public class InProgressFragment extends Fragment{
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mAdapter);
 
-        searchviewmodel = ViewModelProviders.of(getActivity()).get(InProgressViewModel.class);
-        searchviewmodel.searchResult(searchjob_input.getText().toString()).observe(
+        viewModel = ViewModelProviders.of(getActivity()).get(InProgressViewModel.class);
+        viewModel.searchResult().observe(
                 this, jobs -> mAdapter.setJobs(jobs));
 
-        searchjob_input.addTextChangedListener(new TextWatcher() {
+        searchJobInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
@@ -54,7 +54,7 @@ public class InProgressFragment extends Fragment{
 
             @Override
             public void afterTextChanged(Editable editable) {
-                searchviewmodel.setSearch(editable.toString());
+                viewModel.setSearch(editable.toString());
             }
         });
 

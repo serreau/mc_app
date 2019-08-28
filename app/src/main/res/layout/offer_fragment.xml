@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/price_input"
+            android:id="@+id/priceInput"
             android:hint="Prix"
             android:inputType="numberDecimal"
             android:layout_width="match_parent"
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/action_button"
+            android:id="@+id/actionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"

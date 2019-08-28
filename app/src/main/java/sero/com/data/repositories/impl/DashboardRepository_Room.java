@@ -15,48 +15,48 @@ import sero.com.data.repositories.UserRepository;
 public class DashboardRepository_Room implements DashboardRepository {
     DB db;
 
-    UserDao userdao;
+    UserDao userDao;
 
     public DashboardRepository_Room(Context context){
         db = DB.getInstance(context);
-        userdao = db.userDao();
+        userDao = db.userDao();
     }
 
     @Override
     public void update(User job) {
-        userdao.update(job);
+        userDao.update(job);
     }
 
     @Override
     public void insert(User job) {
-        userdao.insert(job);
+        userDao.insert(job);
     }
 
     @Override
     public void delete(User job) {
-        userdao.delete(job);
+        userDao.delete(job);
     }
 
     @Override
     public LiveData<User> get(String id) {
-        return userdao.get(id);
+        return userDao.get(id);
     }
 
     @Override
-    public LiveData<List<User>> get() { return userdao.get(); }
+    public LiveData<List<User>> get() { return userDao.get(); }
 
     @Override
     public boolean exist(String phone, String password) {
-        return userdao.exist(phone, password);
+        return userDao.exist(phone, password);
     }
 
     @Override
     public boolean exist(String phone) {
-        return userdao.exist(phone);
+        return userDao.exist(phone);
     }
 
     @Override
     public void updateImage(String login, String image) {
-        userdao.updateImage(login, image);
+        userDao.updateImage(login, image);
     }
 }

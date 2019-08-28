@@ -16,35 +16,33 @@ import sero.com.util.SharedPreferencesHelper;
 public class OfferViewModel extends AndroidViewModel {
 
     Application application;
-    OfferRepository offerrepository;
-    JobRepository jobrepository;
+    OfferRepository offerRepository;
+    JobRepository jobRepository;
 
-    MutableLiveData<Long> jobid;
+    MutableLiveData<Long> jobId;
     LiveData<Job> job;
     LiveData<Offer> offer;
-
-    Job newjob;
 
     public OfferViewModel(Application application) {
         super(application);
         this.application = application;
-        if(offerrepository == null)
-            offerrepository = RepositoryFactory.getOfferRepository(application);
-        if(jobrepository == null)
-            jobrepository = RepositoryFactory.getJobRepository(application);
-        if(jobid == null)
-            jobid = new MutableLiveData<>();
+        if(offerRepository == null)
+            offerRepository = RepositoryFactory.getOfferRepository(application);
+        if(jobRepository == null)
+            jobRepository = RepositoryFactory.getJobRepository(application);
+        if(jobId == null)
+            jobId = new MutableLiveData<>();
         if(job == null)
-            job = Transformations.switchMap(jobid, input -> jobrepository.get(input));
+            job = Transformations.switchMap(jobId, input -> jobRepository.get(input));
         if(offer == null)
-            offer = Transformations.switchMap(jobid, input -> {
-                return offerrepository.getBySenderAndJob(SharedPreferencesHelper.getlogin(application), input);
+            offer = Transformations.switchMap(jobId, input -> {
+                return offerRepository.getBySenderAndJob(SharedPreferencesHelper.getlogin(application), input);
             });
     }
 
     public void createOffer(Offer offer) {
 
-        offerrepository.insert(offer);
+        offerRepository.insert(offer);
     }
 
     public LiveData<Job> getJob() {
@@ -52,7 +50,7 @@ public class OfferViewModel extends AndroidViewModel {
     }
 
     public void setJobId(long id) {
-            this.jobid.setValue(id);
+            this.jobId.setValue(id);
     }
 
     public LiveData<Offer> getOffer() {

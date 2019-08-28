@@ -12,19 +12,19 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/name_text_input"
+            android:id="@+id/searcLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_large">
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/textedit_home"
+                android:id="@+id/searchInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="En cours"/>
         </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_home"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     </LinearLayout>

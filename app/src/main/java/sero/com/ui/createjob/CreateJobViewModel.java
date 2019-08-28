@@ -12,24 +12,24 @@ import sero.com.util.SharedPreferencesHelper;
 
 public class CreateJobViewModel extends AndroidViewModel {
 
-    JobRepository jobrepository;
-    UserRepository userrepository;
+    JobRepository jobRepository;
+    UserRepository userRepository;
 
     LiveData<String> firstname;
 
     public CreateJobViewModel(Application application) {
         super(application);
         //executor = new Executors.newSingleThreadExecutor();
-        if(jobrepository == null)
-            jobrepository = RepositoryFactory.getJobRepository(application);
-        if(userrepository == null)
-            userrepository = RepositoryFactory.getUserRepository(application);
+        if(jobRepository == null)
+            jobRepository = RepositoryFactory.getJobRepository(application);
+        if(userRepository == null)
+            userRepository = RepositoryFactory.getUserRepository(application);
         if(firstname == null)
-            firstname = userrepository.getFirstname(SharedPreferencesHelper.getSp(application).getString("login", "error"));
+            firstname = userRepository.getFirstname(SharedPreferencesHelper.getlogin(application));
     }
 
     public void insert(Job job){
-        jobrepository.insert(job);
+        jobRepository.insert(job);
     }
 
     public LiveData<String> getFirstname(){

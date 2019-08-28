@@ -13,11 +13,11 @@ import sero.com.ui.offer.OfferFragment;
 import sero.com.ui.todo.ToDoFragment;
 
 public class DetailPagerAdapter extends FragmentPagerAdapter {
-    private Long jobid;
+    private Long jobId;
 
-    public DetailPagerAdapter(FragmentManager fm, Long jobname) {
+    public DetailPagerAdapter(FragmentManager fm, Long jobName) {
         super(fm);
-        this.jobid = jobname;
+        this.jobId = jobName;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class DetailPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int i) {
         Bundle b = new Bundle();
-        b.putLong("id", jobid);
+        b.putLong("id", jobId);
         switch (i){
             case 0 :
                 Fragment detail = new DetailsFragment();

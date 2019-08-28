@@ -13,7 +13,7 @@ import sero.com.util.SharedPreferencesHelper;
 
 public class DashboardViewModel extends AndroidViewModel {
 
-    DashboardRepository dashboardrepository;
+    DashboardRepository dashboardRepository;
     String login;
     LiveData<User> user;
     LiveData<String> image;
@@ -22,13 +22,13 @@ public class DashboardViewModel extends AndroidViewModel {
     public DashboardViewModel(Application application) {
         super(application);
 
-        login = SharedPreferencesHelper.getSp(application).getString("login", "error");
+        login = SharedPreferencesHelper.getlogin(application);
 
-        if(dashboardrepository == null)
-            dashboardrepository = RepositoryFactory.getDashboardRepository(application);
+        if(dashboardRepository == null)
+            dashboardRepository = RepositoryFactory.getDashboardRepository(application);
 
         if(user == null)
-            user = dashboardrepository.get(login);
+            user = dashboardRepository.get(login);
         if(image == null)
             image = Transformations.map(user, user -> user.getImage());
     }
@@ -38,10 +38,10 @@ public class DashboardViewModel extends AndroidViewModel {
     }
 
     public void updateUser(User user) {
-        dashboardrepository.update(user);
+        dashboardRepository.update(user);
     }
 
     public void setImage(Uri image) {
-        dashboardrepository.updateImage(login, image.toString());
+        dashboardRepository.updateImage(login, image.toString());
     }
 }

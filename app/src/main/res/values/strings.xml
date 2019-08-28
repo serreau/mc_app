@@ -1,11 +1,19 @@
 <resources>
-    <string name="app_name">MicroCosmos</string>
-    <string name="hint_home">Trouver un Job</string>
+    <string name="appName">MicroCosmos</string>
+    <string name="hintJobSearch">Trouver un Job</string>
 
-    <string name="fieldrequired_error">Ce champs est obliqatoire</string>
-    <string name="password_error">Mot de passe erroné</string>
+    <string name="fieldrequiredError">Ce champs est obliqatoire</string>
+    <string name="passwordError">Mot de passe erroné</string>
     <string name="error">Une erreur est survenue</string>
-    <string name="pattern_error">Ce format est incorrect</string>
+    <string name="patternError">Ce format est incorrect</string>
 
     <string name="Name">veux</string>
+    <string name="changeProfilToast">Profil modifié</string>
+    <string name="wordConnector">veut</string>
+    <string name="publicKanbanName">PUBLIQUE</string>
+    <string name="privateKanbanName">PRIVÉ</string>
+    <string name="connectionError">Login inconnu ou mot de passe incorrect</string>
+    <string name="signupSuccess">L\'inscription a réussi</string>
+    <string name="accountAlreadyExistError">Ce compte existe déjà</string>
+    <string name="signupError">L\'inscription n\'a pu aboutir</string>
 </resources>

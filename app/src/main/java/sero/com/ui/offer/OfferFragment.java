@@ -20,41 +20,41 @@ import sero.com.ui.R;
 import sero.com.util.SharedPreferencesHelper;
 
 public class OfferFragment extends Fragment{
-    private OfferViewModel offerviewmodel;
+    private OfferViewModel viewModel;
 
-    @BindView(R.id.action_button)
-    FloatingActionButton action_button;
-    @BindView(R.id.price_input)
-    TextInputEditText price_input;
+    @BindView(R.id.actionButton)
+    FloatingActionButton actionButton;
+    @BindView(R.id.priceInput)
+    TextInputEditText priceInput;
 
-    Boolean hasoffer = false;
+    Boolean hasOffer = false;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.offer_fragment, container, false);
-        offerviewmodel = ViewModelProviders.of(this).get(OfferViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(OfferViewModel.class);
         ButterKnife.bind(this, view);
 
-        offerviewmodel.setJobId(getArguments().getLong("id", 0));
+        viewModel.setJobId(getArguments().getLong("id", 0));
 
-        offerviewmodel.getOffer().observe(this, offer -> {
+        viewModel.getOffer().observe(this, offer -> {
             if(offer == null)
                 return;
-            price_input.setText(""+offer.getPrice());
-            price_input.setEnabled(false);
-            hasoffer = true;
+            priceInput.setText(""+offer.getPrice());
+            priceInput.setEnabled(false);
+            hasOffer = true;
         });
-        action_button.setOnClickListener( (v) -> {
-            if(hasoffer) {
-                offerviewmodel.getJob().observe(this, job -> {
+        actionButton.setOnClickListener( (v) -> {
+            if(!hasOffer) {
+                viewModel.getJob().observe(this, job -> {
                     Offer offer = new Offer();
                     offer.setJob(job.getId());
-                    offer.setPrice(Long.parseLong(price_input.getText().toString()));
-                    offer.setSender(SharedPreferencesHelper.getSp(getContext()).getString("login", "error_login"));
+                    offer.setPrice(Long.parseLong(priceInput.getText().toString()));
+                    offer.setSender(SharedPreferencesHelper.getlogin(getContext()));
                     offer.setReceiver(job.getOwner());
                     offer.setState("SEND");
-                    offerviewmodel.createOffer(offer);
+                    viewModel.createOffer(offer);
                 });
             }
         });

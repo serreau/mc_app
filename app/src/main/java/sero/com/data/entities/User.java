@@ -56,8 +56,8 @@ public class User {
     }
 
     public String getImage() {
-        //return image;
-        return "https://img5.goodfon.com/original/2880x1800/a/36/tochki-linii-soedineniia.jpg";
+        return image;
+        //return "https://img5.goodfon.com/original/2880x1800/a/36/tochki-linii-soedineniia.jpg";
     }
 
     public void setImage(String image) {

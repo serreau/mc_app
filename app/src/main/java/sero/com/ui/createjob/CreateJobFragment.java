@@ -22,20 +22,20 @@ import sero.com.util.SharedPreferencesHelper;
 import sero.com.util.State;
 
 public class CreateJobFragment extends Fragment {
-    CreateJobViewModel createviewmodel;
+    CreateJobViewModel createViewModel;
 
-    @BindView(R.id.action_button)
-    FloatingActionButton action_button;
+    @BindView(R.id.actionButton)
+    FloatingActionButton actionButton;
 
-    @BindView(R.id.jobowner_input)
-    TextInputEditText jobowner_input;
-    @BindView(R.id.jobname_input)
-    TextInputEditText jobname_input;
+    @BindView(R.id.jobOwnerInput)
+    TextInputEditText jobOwnerInput;
+    @BindView(R.id.jobNameInput)
+    TextInputEditText jobNameInput;
 
-    @BindView(R.id.jobowner_layout)
-    TextInputLayout jobowner_layout;
-    @BindView(R.id.jobname_layout)
-    TextInputLayout jobname_layout;
+    @BindView(R.id.jobOwnerLayout)
+    TextInputLayout jobOwnerLayout;
+    @BindView(R.id.jobNameLayout)
+    TextInputLayout jobNameLayout;
 
     @Nullable
     @Override
@@ -43,30 +43,30 @@ public class CreateJobFragment extends Fragment {
         View view = inflater.inflate(R.layout.createjob_fragment, container, false);
         ButterKnife.bind(this, view);
 
-        createviewmodel = ViewModelProviders.of(getActivity()).get(CreateJobViewModel.class);
+        createViewModel = ViewModelProviders.of(getActivity()).get(CreateJobViewModel.class);
 
-        createviewmodel.getFirstname().observe( this, s -> jobowner_input.setText(s));
+        createViewModel.getFirstname().observe( this, s -> jobOwnerInput.setText(s));
 
-        jobowner_input.setOnFocusChangeListener(
-                (v,hasFocus) -> jobowner_layout.setError(null));
-        jobname_input.setOnFocusChangeListener(
-                (v,hasFocus) ->  jobname_layout.setError(null));
+        jobOwnerInput.setOnFocusChangeListener(
+                (v,hasFocus) -> jobOwnerLayout.setError(null));
+        jobNameInput.setOnFocusChangeListener(
+                (v,hasFocus) ->  jobNameLayout.setError(null));
 
-        action_button.setOnClickListener( (v) -> {
+        actionButton.setOnClickListener( (v) -> {
             Job newjob = new Job();
-            newjob.setOwner(SharedPreferencesHelper.getSp(getContext()).getString("login", "error"));
-            newjob.setName(jobname_input.getText().toString());
+            newjob.setOwner(SharedPreferencesHelper.getlogin(getContext()));
+            newjob.setName(jobNameInput.getText().toString());
             newjob.setState(State.TODO.toString());
 
             if(!newjob.getOwner().isEmpty() && !newjob.getName().isEmpty()) {
-                createviewmodel.insert(newjob);
+                createViewModel.insert(newjob);
                 Navigation.findNavController(view).popBackStack();
             }
 
             if (newjob.getOwner().isEmpty())
-                jobowner_layout.setError(getString(R.string.fieldrequired_error));
+                jobOwnerLayout.setError(getString(R.string.fieldrequiredError));
             if (newjob.getName().isEmpty())
-                jobname_layout.setError(getString(R.string.fieldrequired_error));
+                jobNameLayout.setError(getString(R.string.fieldrequiredError));
 
         });
 

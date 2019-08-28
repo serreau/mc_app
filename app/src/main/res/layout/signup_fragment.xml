@@ -8,97 +8,97 @@
     android:orientation="vertical">
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/login_layout"
+        android:id="@+id/loginLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_large"
         app:errorEnabled="true"
         android:hint="Téléphone">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/login_input"
+            android:id="@+id/loginInput"
             android:inputType="phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/password_layout"
+        android:id="@+id/passwordLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_large"
         app:errorEnabled="true"
         android:hint="Mot de passe">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/password_input"
+            android:id="@+id/passwordInput"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/passwordconfirmation_layout"
+        android:id="@+id/passwordConfirmationLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_large"
         app:errorEnabled="true"
         android:hint="Mot de passe">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/passwordconfirmation_input"
+            android:id="@+id/passwordConfirmationInput"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/mail_layout"
+        android:id="@+id/mailLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_large"
         app:errorEnabled="true"
         android:hint="Adresse mail">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/mail_input"
+            android:id="@+id/mailInput"
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/firstname_layout"
+        android:id="@+id/firstnameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_large"
         app:errorEnabled="true"
         android:hint="Prénom">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/firstname_input"
+            android:id="@+id/firstnameInput"
             android:inputType="textPersonName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/lastname_layout"
+        android:id="@+id/lastnameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_large"
         app:errorEnabled="true"
         android:hint="Nom">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/lastname_input"
+            android:id="@+id/lastnameInput"
             android:inputType="textPersonName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/signup_button"
+        android:id="@+id/signupButton"
         android:text="S'inscrire"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/login_button"
+        android:id="@+id/loginButton"
         android:text="Se connecter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

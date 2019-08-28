@@ -27,27 +27,27 @@ import sero.com.ui.R;
 import sero.com.util.SharedPreferencesHelper;
 
 public class LoginFragment extends Fragment  implements  Validator.ValidationListener{
-    private LoginViewModel loginviewmodel;
+    private LoginViewModel viewModel;
 
-    @BindView(R.id.login_layout)
-    TextInputLayout login_layout;
+    @BindView(R.id.loginLayout)
+    TextInputLayout loginLayout;
 
-    @BindView(R.id.password_layout)
-    TextInputLayout password_layout;
+    @BindView(R.id.passwordLayout)
+    TextInputLayout passwordLayout;
 
-    @BindView(R.id.login_input)
+    @BindView(R.id.loginInput)
     @NotEmpty
-    TextInputEditText login_input;
+    TextInputEditText loginInput;
 
-    @BindView(R.id.password_input)
+    @BindView(R.id.passwordInput)
     @Password(scheme = Password.Scheme.ALPHA)
-    TextInputEditText password_input;;
+    TextInputEditText passwordInput;;
 
-    @BindView(R.id.login_button)
-    Button login_button;
+    @BindView(R.id.loginButton)
+    Button loginButton;
 
-    @BindView(R.id.signup_button)
-    Button signup_button;
+    @BindView(R.id.signupButton)
+    Button signupButton;
 
     private Validator validator;
 
@@ -57,7 +57,7 @@ public class LoginFragment extends Fragment  implements  Validator.ValidationLis
         View view = inflater.inflate(R.layout.login_fragment, container, false);
         ButterKnife.bind(this, view);
 
-        loginviewmodel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
 
         validator = new Validator(this);
         validator.setValidationListener(this);
@@ -67,40 +67,40 @@ public class LoginFragment extends Fragment  implements  Validator.ValidationLis
     }
 
     public void createListeners(View view) {
-        login_button.setOnClickListener(v -> {
+        loginButton.setOnClickListener(v -> {
             validator.validate();
         });
 
-        signup_button.setOnClickListener(v -> {
+        signupButton.setOnClickListener(v -> {
             Bundle b = new Bundle();
-            b.putString("login", getText(login_input));
-            b.putString("password", getText(password_input));
+            b.putString("login", getText(loginInput));
+            b.putString("password", getText(passwordInput));
             Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_signupFragment, b);
         });
 
-        login_input.setOnFocusChangeListener((view1, b) -> login_layout.setError(null));
-        password_input.setOnFocusChangeListener((view1, b) -> password_layout.setError(null));
+        loginInput.setOnFocusChangeListener((view1, b) -> loginLayout.setError(null));
+        passwordInput.setOnFocusChangeListener((view1, b) -> passwordLayout.setError(null));
     }
 
     @Override
     public void onValidationSucceeded() {
-        String login = getText(login_input);
-        String password = getText(password_input);
+        String login = getText(loginInput);
+        String password = getText(passwordInput);
 
-        if(loginviewmodel.exist(login, password)){
-            loginviewmodel.login(login);
+        if(viewModel.exist(login, password)){
+            viewModel.login(login);
             Navigation.findNavController(this.getView()).navigate(R.id.action_loginFragment_to_kanbanViewPager);
         } else {
-            login_layout.setError("Login inconnu ou mot de passe incorrect");
+            loginLayout.setError(getString(R.string.connectionError));
         }
     }
 
     @Override
     public void onValidationFailed(List<ValidationError> errors) {
         for (ValidationError error : errors) {
-            TextInputLayout input_layout = (TextInputLayout) error.getView().getParent().getParent();
+            TextInputLayout inputLayout = (TextInputLayout) error.getView().getParent().getParent();
             String message = error.getCollatedErrorMessage(this.getContext());
-            input_layout.setError(message);
+            inputLayout.setError(message);
         }
     }
 

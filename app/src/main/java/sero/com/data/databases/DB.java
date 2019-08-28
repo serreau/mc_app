@@ -27,7 +27,7 @@ public abstract class DB extends RoomDatabase {
 
     public final static synchronized DB getInstance(final Context context) {
         if(INSTANCE == null)
-            INSTANCE =  Room.databaseBuilder(context.getApplicationContext(), DB.class, "subapp-db")
+            INSTANCE =  Room.databaseBuilder(context.getApplicationContext(), DB.class, "microcosmos-db")
                 .allowMainThreadQueries()
                 .build();
         return INSTANCE;

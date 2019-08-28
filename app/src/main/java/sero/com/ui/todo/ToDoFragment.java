@@ -18,27 +18,24 @@ import android.view.ViewGroup;
 import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import sero.com.data.entities.Job;
 import sero.com.ui.R;
 import sero.com.ui.adapter.JobAdapter;
 
 public class ToDoFragment extends Fragment{
     View view;
 
-    ToDoViewModel searchviewmodel;
+    ToDoViewModel viewModel;
 
-    @BindView(R.id.action_button)
-    FloatingActionButton action_button;
+    @BindView(R.id.actionButton)
+    FloatingActionButton actionButton;
 
-    @BindView(R.id.textedit_home) TextInputEditText searchjob_input;
-    @BindView(R.id.recycler_home) RecyclerView recyclerView;
+    @BindView(R.id.searchInput) TextInputEditText searchJobInput;
+    @BindView(R.id.recyclerView) RecyclerView recyclerView;
 
     private JobAdapter mAdapter;
-    List<Job> arraylist;
 
     @Nullable
     @Override
@@ -53,10 +50,10 @@ public class ToDoFragment extends Fragment{
         setListeners();
 
 
-        searchviewmodel = ViewModelProviders.of(getActivity()).get(ToDoViewModel.class);
-        searchviewmodel.searchResult().observe(
+        viewModel = ViewModelProviders.of(getActivity()).get(ToDoViewModel.class);
+        viewModel.searchResult().observe(
                 this, jobs -> {
-                    searchviewmodel.getUsers().observe(this, users -> {
+                    viewModel.getUsers().observe(this, users -> {
                         mAdapter.setUsers(users);
                     });
                     mAdapter.setJobs(jobs);
@@ -67,17 +64,17 @@ public class ToDoFragment extends Fragment{
     }
 
     private void setListeners() {
-        action_button.setOnClickListener(
+        actionButton.setOnClickListener(
                 Navigation.createNavigateOnClickListener(
                         R.id.action_kanbanViewPagerFragment_to_createJobFragment
                 ));
-        action_button.setOnLongClickListener(v -> {
+        actionButton.setOnLongClickListener(v -> {
             Navigation.findNavController(view).navigate(R.id.action_kanbanViewPagerFragment_to_kanbansFragment);
             return true;
         });
 
 
-        searchjob_input.addTextChangedListener(new TextWatcher() {
+        searchJobInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
@@ -86,7 +83,7 @@ public class ToDoFragment extends Fragment{
 
             @Override
             public void afterTextChanged(Editable editable) {
-                searchviewmodel.setSearch(editable.toString());
+                viewModel.setSearch(editable.toString());
             }
         });
     }

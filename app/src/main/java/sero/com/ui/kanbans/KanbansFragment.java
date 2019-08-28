@@ -19,10 +19,10 @@ import sero.com.ui.R;
 import sero.com.util.SharedPreferencesHelper;
 
 public class KanbansFragment extends Fragment {
-    @BindView(R.id.public_kanban_text) TextView public_kanban_text;
-    @BindView(R.id.private_kanban_text) TextView private_kanban_text;
-    @BindView(R.id.public_kanban_layout) CardView public_kanban_layout;
-    @BindView(R.id.private_kanban_layout) CardView private_kanban_layout;
+    @BindView(R.id.publicKanbanTextView) TextView publicKanbanTextView;
+    @BindView(R.id.privateKanbanTextView) TextView privateKanbanTextView;
+    @BindView(R.id.publicKanbanLayout) CardView publicKanbanLayout;
+    @BindView(R.id.privateKanbanLayout) CardView privateKanbanLayout;
 
     @Nullable
     @Override
@@ -30,16 +30,16 @@ public class KanbansFragment extends Fragment {
         View view = inflater.inflate(R.layout.kanbans_fragment, container, false);
         ButterKnife.bind(this, view);
 
-        public_kanban_text.setText("PUBLIQUE");
-        private_kanban_text.setText("PRIVÉ");
+        publicKanbanTextView.setText(getString(R.string.publicKanbanName));
+        privateKanbanTextView.setText(getString(R.string.privateKanbanName));
 
-        public_kanban_layout.setOnClickListener(v -> {
+        publicKanbanLayout.setOnClickListener(v -> {
             SharedPreferencesHelper.setKanban("public", getContext());
             Navigation.findNavController(view).popBackStack();
         });
 
-        private_kanban_layout.setOnClickListener(v -> {
-            SharedPreferencesHelper.setKanban(SharedPreferencesHelper.getSp(getContext()).getString("login", "public"), getContext());
+        privateKanbanLayout.setOnClickListener(v -> {
+            SharedPreferencesHelper.setKanban(SharedPreferencesHelper.getlogin(getContext()), getContext());
             Navigation.findNavController(view).popBackStack();
         });
 

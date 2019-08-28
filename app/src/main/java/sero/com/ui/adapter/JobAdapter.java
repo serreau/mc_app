@@ -32,14 +32,14 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_item, parent, false);
         ButterKnife.bind(this, view);
 
-        JobViewHolder jobviewholder = new JobViewHolder(view);
+        JobViewHolder jobViewHolder = new JobViewHolder(view);
         view.setOnClickListener( v -> {
             Bundle b = new Bundle();
-            b.putLong("id", jobviewholder.getJob().getId());
+            b.putLong("id", jobViewHolder.getJob().getId());
             Navigation.findNavController(view).navigate(R.id.action_kanbanViewPagerFragment_to_detailViewPagerFragment, b);
         });
 
-        return jobviewholder;
+        return jobViewHolder;
     }
 
     @Override
@@ -82,7 +82,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
 
         public JobViewHolder(View view) {
             super(view);
-            name = view.findViewById(R.id.name_card);
+            name = view.findViewById(R.id.nameCard);
         }
 
         public void setJob(Job job) {

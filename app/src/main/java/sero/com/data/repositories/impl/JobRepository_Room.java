@@ -12,44 +12,44 @@ import sero.com.data.repositories.JobRepository;
 
 public class JobRepository_Room implements JobRepository {
     DB db;
-    JobDao jobdao;
+    JobDao jobDao;
 
     public JobRepository_Room(Context context){
         db = DB.getInstance(context);
-        jobdao = db.jobDao();
+        jobDao = db.jobDao();
     }
 
     @Override
     public void update(Job job) {
-        jobdao.update(job);
+        jobDao.update(job);
     }
 
     @Override
     public void insert(Job job) {
-        jobdao.insert(job);
+        jobDao.insert(job);
     }
 
     @Override
     public void delete(Job job) {
-        jobdao.delete(job);
+        jobDao.delete(job);
     }
 
     @Override
     public LiveData<Job> get(long id) {
-        return jobdao.get(id);
+        return jobDao.get(id);
     }
 
     @Override
-    public LiveData<List<Job>> get() { return jobdao.get(); }
+    public LiveData<List<Job>> get() { return jobDao.get(); }
 
     @Override
     public LiveData<List<Job>> getByStateSearch(String state, String search) {
-        return jobdao.getByStateSearch(state, search);
+        return jobDao.getByStateSearch(state, search);
     }
 
     @Override
     public LiveData<List<Job>> getByOwnerStateSearch(String owner, String state, String search) {
-        return jobdao.getByOwnerStateSearch(owner, state, search);
+        return jobDao.getByOwnerStateSearch(owner, state, search);
     }
 
 }

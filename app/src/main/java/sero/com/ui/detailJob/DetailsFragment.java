@@ -16,22 +16,22 @@ import butterknife.ButterKnife;
 import sero.com.ui.R;
 
 public class DetailsFragment extends Fragment {
-    DetailViewModel viewmodel;
+    DetailViewModel viewModel;
 
-    @BindView(R.id.name_card) TextView name_text;
+    @BindView(R.id.nameCard) TextView nameCard;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.detailsjob_fragment, container, false);
         ButterKnife.bind(this, view);
-        viewmodel = ViewModelProviders.of(this).get(DetailViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(DetailViewModel.class);
 
-        viewmodel.setJobId(getArguments().getLong("id", 0));
+        viewModel.setJobId(getArguments().getLong("id", 0));
 
-        viewmodel.getJob().observe(this, job -> {
-           viewmodel.getUser(job.getOwner()).observe(this, user -> {
-               name_text.setText(user.getFirstname()+" veut "+job.getName());
+        viewModel.getJob().observe(this, job -> {
+           viewModel.getUser(job.getOwner()).observe(this, user -> {
+               nameCard.setText(user.getFirstname()+" "+getString(R.string.wordConnector)+" "+job.getName());
            });
         });
 

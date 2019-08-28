@@ -6,8 +6,6 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Transformations;
 
-import javax.xml.transform.TransformerFactory;
-
 import sero.com.data.Factories.RepositoryFactory;
 import sero.com.data.entities.Job;
 import sero.com.data.entities.User;
@@ -15,26 +13,26 @@ import sero.com.data.repositories.JobRepository;
 import sero.com.data.repositories.UserRepository;
 
 public class DetailViewModel extends AndroidViewModel {
-    JobRepository jobrepository;
-    UserRepository userrepository;
+    JobRepository jobRepository;
+    UserRepository userRepository;
 
-    MutableLiveData<Long> jobid;
+    MutableLiveData<Long> jobId;
     LiveData<Job> job;
 
     public DetailViewModel(Application application) {
         super(application);
-        if(jobrepository == null)
-            jobrepository = RepositoryFactory.getJobRepository(application);
-        if(userrepository == null)
-            userrepository = RepositoryFactory.getUserRepository(application);
-        if(jobid == null)
-            jobid = new MutableLiveData<>();
+        if(jobRepository == null)
+            jobRepository = RepositoryFactory.getJobRepository(application);
+        if(userRepository == null)
+            userRepository = RepositoryFactory.getUserRepository(application);
+        if(jobId == null)
+            jobId = new MutableLiveData<>();
         if(job == null)
-            job = Transformations.switchMap(jobid, id -> jobrepository.get(id));
+            job = Transformations.switchMap(jobId, id -> jobRepository.get(id));
     }
 
-    public void setJobId(Long jobid) {
-        this.jobid.setValue(jobid);
+    public void setJobId(Long jobId) {
+        this.jobId.setValue(jobId);
     }
 
     public LiveData<Job> getJob() {
@@ -42,6 +40,6 @@ public class DetailViewModel extends AndroidViewModel {
     }
 
     public LiveData<User> getUser(String login) {
-        return userrepository.get(login);
+        return userRepository.get(login);
     }
 }

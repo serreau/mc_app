@@ -7,7 +7,7 @@
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    android:id="@+id/framelayout_home">
+    android:id="@+id/mainLayout">
 
     <fragment
         android:id="@+id/navHost"

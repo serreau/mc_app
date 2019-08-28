@@ -30,44 +30,44 @@ import sero.com.data.entities.User;
 import sero.com.ui.R;
 
 public class SignupFragment extends Fragment  implements  Validator.ValidationListener{
-    SignupViewModel viewmodel;
+    SignupViewModel viewModel;
 
-    @BindView(R.id.login_layout)
-    TextInputLayout login_layout;
+    @BindView(R.id.loginLayout)
+    TextInputLayout loginLayout;
 
-    @BindView(R.id.password_layout)
-    TextInputLayout password_layout;
+    @BindView(R.id.passwordLayout)
+    TextInputLayout passwordLayout;
 
-    @BindView(R.id.mail_layout)
-    TextInputLayout mail_layout;
+    @BindView(R.id.mailLayout)
+    TextInputLayout mailLayout;
 
-    @BindView(R.id.login_input)
+    @BindView(R.id.loginInput)
     @NotEmpty
-    TextInputEditText login_input;
+    TextInputEditText loginInput;
 
-    @BindView(R.id.password_input)
+    @BindView(R.id.passwordInput)
     @Password
-    TextInputEditText password_input;
+    TextInputEditText passwordInput;
 
-    @BindView(R.id.passwordconfirmation_input)
+    @BindView(R.id.passwordConfirmationInput)
     @ConfirmPassword
-    TextInputEditText passwordconfirmation_input;
+    TextInputEditText passwordConfirmationInput;
 
-    @BindView(R.id.mail_input)
+    @BindView(R.id.mailInput)
     @Email
-    TextInputEditText mail_input;
+    TextInputEditText mailInput;
 
-    @BindView(R.id.firstname_input)
-    TextInputEditText firstname_input;
+    @BindView(R.id.firstnameInput)
+    TextInputEditText firstnameInput;
 
-    @BindView(R.id.lastname_input)
-    TextInputEditText lastname_input;
+    @BindView(R.id.lastnameInput)
+    TextInputEditText lastnameInput;
 
-    @BindView(R.id.login_button)
-    Button login_button;
+    @BindView(R.id.loginButton)
+    Button loginButton;
 
-    @BindView(R.id.signup_button)
-    Button signup_button;
+    @BindView(R.id.signupButton)
+    Button signupButton;
 
     private Validator validator;
 
@@ -77,7 +77,7 @@ public class SignupFragment extends Fragment  implements  Validator.ValidationLi
         View view = inflater.inflate(R.layout.signup_fragment, container, false);
         ButterKnife.bind(this, view);
 
-        viewmodel = ViewModelProviders.of(this).get(SignupViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(SignupViewModel.class);
 
         validator = new Validator(this);
         validator.setValidationListener(this);
@@ -87,51 +87,51 @@ public class SignupFragment extends Fragment  implements  Validator.ValidationLi
     }
 
     public void createListeners(View view) {
-        login_button.setOnClickListener(v -> {
+        loginButton.setOnClickListener(v -> {
             Bundle b = new Bundle();
-            b.putString("login", login_input.getText().toString());
-            b.putString("password", password_input.getText().toString());
+            b.putString("login", loginInput.getText().toString());
+            b.putString("password", passwordInput.getText().toString());
             Navigation.findNavController(view).navigate(R.id.action_signupFragment_to_loginFragment, b);
         });
 
-        signup_button.setOnClickListener(v -> {
+        signupButton.setOnClickListener(v -> {
             validator.validate();
         });
 
-        login_input.setOnFocusChangeListener((view1, b) -> login_layout.setError(null));
-        password_input.setOnFocusChangeListener((view1, b) -> password_layout.setError(null));
-        mail_input.setOnFocusChangeListener((view1, b) -> mail_layout.setError(null));
+        loginInput.setOnFocusChangeListener((view1, b) -> loginLayout.setError(null));
+        passwordInput.setOnFocusChangeListener((view1, b) -> passwordLayout.setError(null));
+        mailInput.setOnFocusChangeListener((view1, b) -> mailLayout.setError(null));
     }
 
     @Override
     public void onValidationSucceeded() {
         User u = new User();
-        u.setPhone(getText(login_input));
-        u.setPassword(getText(password_input));
-        u.setMail(getText(mail_input));
-        u.setFirstname(getText(firstname_input));
-        u.setLastname(getText(lastname_input));
+        u.setPhone(getText(loginInput));
+        u.setPassword(getText(passwordInput));
+        u.setMail(getText(mailInput));
+        u.setFirstname(getText(firstnameInput));
+        u.setLastname(getText(lastnameInput));
 
-        if(!viewmodel.exist(getText(login_input), getText(password_input))){
-            viewmodel.insert(u);
-            viewmodel.login(getText(login_input));
-            Toast.makeText(getContext(), "L'inscription est ok", Toast.LENGTH_SHORT).show();
+        if(!viewModel.exist(getText(loginInput), getText(passwordInput))){
+            viewModel.insert(u);
+            viewModel.login(getText(loginInput));
+            Toast.makeText(getContext(), getString(R.string.signupSuccess), Toast.LENGTH_SHORT).show();
 
             Navigation.findNavController(this.getView()).navigate(R.id.action_signupFragment_to_loginFragment);
 
-        } else if (viewmodel.exist(getText(login_input))){
-            login_layout.setError("Ce compte existe déjà");
+        } else if (viewModel.exist(getText(loginInput))){
+            loginLayout.setError(getString(R.string.accountAlreadyExistError));
         } else {
-            Toast.makeText(getContext(), "L'inscription n'a pu aboutir", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getString(R.string.signupError), Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void onValidationFailed(List<ValidationError> errors) {
         for (ValidationError error : errors) {
-            TextInputLayout input_layout = (TextInputLayout) error.getView().getParent().getParent();
+            TextInputLayout inputLayout = (TextInputLayout) error.getView().getParent().getParent();
             String message = error.getCollatedErrorMessage(this.getContext());
-            input_layout.setError(message);
+            inputLayout.setError(message);
         }
     }
 

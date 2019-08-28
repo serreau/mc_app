@@ -10,12 +10,12 @@ import sero.com.util.SharedPreferencesHelper;
 
 public class SignupViewModel extends AndroidViewModel {
 
-    UserRepository userrepository;
+    UserRepository userRepository;
 
     public SignupViewModel(Application application) {
         super(application);
-        if(userrepository == null)
-            userrepository = RepositoryFactory.getUserRepository(application);
+        if(userRepository == null)
+            userRepository = RepositoryFactory.getUserRepository(application);
     }
 
     public void login(String login){
@@ -23,14 +23,14 @@ public class SignupViewModel extends AndroidViewModel {
     }
 
     public void insert(User user){
-        userrepository.insert(user);
+        userRepository.insert(user);
     }
 
     public boolean exist(String phone, String password){
-        return userrepository.exist(phone, password);
+        return userRepository.exist(phone, password);
     }
 
     public boolean exist(String phone){
-        return userrepository.exist(phone);
+        return userRepository.exist(phone);
     }
 }

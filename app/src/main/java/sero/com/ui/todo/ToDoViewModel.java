@@ -3,14 +3,11 @@ package sero.com.ui.todo;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Transformations;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.ListIterator;
 
 import sero.com.data.Factories.RepositoryFactory;
 import sero.com.data.entities.Job;
@@ -22,65 +19,64 @@ import sero.com.util.State;
 
 public class ToDoViewModel extends AndroidViewModel {
 
-    JobRepository jobrepository;
-    UserRepository userrepository;
+    JobRepository jobRepository;
+    UserRepository userRepository;
 
     MutableLiveData<String> search;
-    LiveData<List<Job>> jobsbysearch;
-    LiveData<List<User>> userbyjob;
-
+    LiveData<List<Job>> jobsBySearch;
+    LiveData<List<User>> userByJob;
 
     public ToDoViewModel(Application application) {
 
         super(application);
         //executor = new Executors.newSingleThreadExecutor();
-        if(jobrepository == null)
-            jobrepository = RepositoryFactory.getJobRepository(application);
-        if(userrepository == null)
-            userrepository = RepositoryFactory.getUserRepository(application);
+        if(jobRepository == null)
+            jobRepository = RepositoryFactory.getJobRepository(application);
+        if(userRepository == null)
+            userRepository = RepositoryFactory.getUserRepository(application);
         if(search == null)
             search = new MutableLiveData();
-        if(jobsbysearch == null)
-            jobsbysearch = Transformations.switchMap(search, search -> {
+        if(jobsBySearch == null)
+            jobsBySearch = Transformations.switchMap(search, search -> {
                 if("public".equals(SharedPreferencesHelper.getKanban(application)))
-                    return jobrepository.getByStateSearch(State.TODO.toString(), search);
+                    return jobRepository.getByStateSearch(State.TODO.toString(), search);
                 else
-                    return jobrepository.getByOwnerStateSearch(SharedPreferencesHelper.getKanban(application), State.TODO.toString(), search);
+                    return jobRepository.getByOwnerStateSearch(SharedPreferencesHelper.getKanban(application), State.TODO.toString(), search);
             });
-        if(userbyjob == null)
-            userbyjob = Transformations.switchMap(jobsbysearch, jobs -> {
+        if(userByJob == null)
+            userByJob = Transformations.switchMap(jobsBySearch, jobs -> {
                 List<String> al = new ArrayList();
                 jobs.forEach(job -> {
                     al.add(job.getOwner());
                 });
                 String[] array = al.toArray(new String[al.size()]);
-                return userrepository.get(array);
+                return userRepository.get(array);
             });
 
     }
 
     public void insert(Job job){
-        jobrepository.insert(job);
+        jobRepository.insert(job);
     }
 
     public void delete(Job job){
-        jobrepository.delete(job);
+        jobRepository.delete(job);
     }
 
     public void update(Job job){
-        jobrepository.update(job);
+        jobRepository.update(job);
     }
 
     public LiveData<Job> get(long id){
-        return jobrepository.get(id);
+        return jobRepository.get(id);
     }
 
     public LiveData<List<Job>> get(){
-        return jobrepository.get();
+        return jobRepository.get();
     }
 
     public LiveData<List<Job>> searchResult(){
-        return jobsbysearch;
+        return jobsBySearch;
     }
 
     public void setSearch(String text){
@@ -88,6 +84,6 @@ public class ToDoViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<User>> getUsers(){
-        return userbyjob;
+        return userByJob;
     }
 }

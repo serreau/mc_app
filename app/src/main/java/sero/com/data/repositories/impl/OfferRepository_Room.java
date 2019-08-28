@@ -15,40 +15,40 @@ import sero.com.data.repositories.UserRepository;
 
 public class OfferRepository_Room implements OfferRepository {
     DB db;
-    OfferDao offerdao;
+    OfferDao offerDao;
 
     public OfferRepository_Room(Context context){
         db = DB.getInstance(context);
-        offerdao = db.offerDao();
+        offerDao = db.offerDao();
     }
 
     @Override
     public void insert(Offer offer) {
-        offerdao.insert(offer);
+        offerDao.insert(offer);
     }
 
     @Override
     public void delete(Offer offer) {
-        offerdao.delete(offer);
+        offerDao.delete(offer);
     }
 
     @Override
     public void update(Offer offer) {
-        offerdao.update(offer);
+        offerDao.update(offer);
     }
 
     @Override
     public LiveData<Offer> get(long id) {
-        return offerdao.get(id);
+        return offerDao.get(id);
     }
 
     @Override
     public LiveData<List<Offer>> get() {
-        return offerdao.get();
+        return offerDao.get();
     }
 
     @Override
-    public LiveData<Offer> getBySenderAndJob(String login, long jobid) {
-        return offerdao.getBySenderAndJob(login, jobid);
+    public LiveData<Offer> getBySenderAndJob(String login, long jobId) {
+        return offerDao.getBySenderAndJob(login, jobId);
     }
 }

@@ -22,11 +22,11 @@ import sero.com.ui.R;
 import sero.com.ui.adapter.JobAdapter;
 
 public class DoneFragment extends Fragment{
-    DoneViewModel searchviewmodel;
+    DoneViewModel viewModel;
 
-    @BindView(R.id.textedit_home) TextInputEditText searchjob_input;
+    @BindView(R.id.searchInput) TextInputEditText searchJobInput;
 
-    @BindView(R.id.recycler_home) RecyclerView recyclerView;
+    @BindView(R.id.recyclerView) RecyclerView recyclerView;
 
     private JobAdapter mAdapter;
 
@@ -40,11 +40,11 @@ public class DoneFragment extends Fragment{
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mAdapter);
 
-        searchviewmodel = ViewModelProviders.of(getActivity()).get(DoneViewModel.class);
-        searchviewmodel.searchResult(searchjob_input.getText().toString()).observe(
+        viewModel = ViewModelProviders.of(getActivity()).get(DoneViewModel.class);
+        viewModel.searchResult().observe(
                 this, jobs -> mAdapter.setJobs(jobs));
 
-        searchjob_input.addTextChangedListener(new TextWatcher() {
+        searchJobInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
@@ -53,7 +53,7 @@ public class DoneFragment extends Fragment{
 
             @Override
             public void afterTextChanged(Editable editable) {
-                searchviewmodel.setSearch(editable.toString());
+                viewModel.setSearch(editable.toString());
             }
         });
 

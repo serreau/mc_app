@@ -15,43 +15,43 @@ import sero.com.util.State;
 
 public class InProgressViewModel extends AndroidViewModel {
 
-    JobRepository jobrepository;
+    JobRepository jobRepository;
     MutableLiveData<String> search;
-    LiveData<List<Job>> jobsbysearch;
+    LiveData<List<Job>> jobsBySearch;
 
 
     public InProgressViewModel(Application application) {
         super(application);
         //executor = new Executors.newSingleThreadExecutor();
-        if(jobrepository == null)
-            jobrepository = RepositoryFactory.getJobRepository(application);
+        if(jobRepository == null)
+            jobRepository = RepositoryFactory.getJobRepository(application);
         if(search == null)
             search = new MutableLiveData();
-        if(jobsbysearch == null)
-            jobsbysearch = Transformations.switchMap(search, search -> jobrepository.getByStateSearch(State.INPROGRESS.toString(), search));
+        if(jobsBySearch == null)
+            jobsBySearch = Transformations.switchMap(search, search -> jobRepository.getByStateSearch(State.INPROGRESS.toString(), search));
     }
 
     public void insert(Job job){
-        jobrepository.insert(job);
+        jobRepository.insert(job);
     }
 
     public void delete(Job job){
-        jobrepository.delete(job);
+        jobRepository.delete(job);
     }
 
     public void update(Job job){
-        jobrepository.update(job);
+        jobRepository.update(job);
     }
 
     public LiveData<Job> get(long id){
-        return jobrepository.get(id);
+        return jobRepository.get(id);
     }
 
     public LiveData<List<Job>> get(){
-        return jobrepository.get();
+        return jobRepository.get();
     }
 
-    public LiveData<List<Job>> searchResult(String search){ return jobsbysearch; }
+    public LiveData<List<Job>> searchResult(){ return jobsBySearch; }
 
     public void setSearch(String text){ search.setValue(text); }
 
