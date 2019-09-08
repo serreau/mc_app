@@ -34,4 +34,7 @@ public interface JobDao {
 
     @Query("SELECT * FROM Job WHERE owner = :owner AND state = :state AND name LIKE '%' || :search || '%'")
     LiveData<List<Job>> getByOwnerStateSearch(String owner, String state, String search);
+
+    @Query("SELECT COUNT(id) FROM Job WHERE owner = :login AND id = :jobId")
+    LiveData<Boolean> isOwner(String login, long jobId);
 }

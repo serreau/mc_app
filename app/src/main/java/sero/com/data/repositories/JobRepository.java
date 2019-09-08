@@ -16,4 +16,6 @@ public interface JobRepository{
 
     LiveData<List<Job>> getByStateSearch(String toString, String search);
     LiveData<List<Job>> getByOwnerStateSearch(String owner, String toString, String search);
+
+    LiveData<Boolean> isOwner(String login, long jobId);
 }

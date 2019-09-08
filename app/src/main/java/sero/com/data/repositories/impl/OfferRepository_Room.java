@@ -51,4 +51,9 @@ public class OfferRepository_Room implements OfferRepository {
     public LiveData<Offer> getBySenderAndJob(String login, long jobId) {
         return offerDao.getBySenderAndJob(login, jobId);
     }
+
+    @Override
+    public LiveData<List<Offer>> getByJob(Long jobId) {
+        return offerDao.getByJob(jobId);
+    }
 }

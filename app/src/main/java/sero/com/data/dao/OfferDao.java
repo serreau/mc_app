@@ -31,4 +31,7 @@ public interface OfferDao {
 
     @Query("SELECT * FROM Offer WHERE sender = :login AND job = :id LIMIT 1")
     LiveData<Offer> getBySenderAndJob(String login, long id);
+
+    @Query("SELECT * FROM Offer WHERE job = :jobId")
+    LiveData<List<Offer>> getByJob(Long jobId);
 }

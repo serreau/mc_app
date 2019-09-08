@@ -41,6 +41,7 @@ public class ToDoFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.todo_fragment, container, false);
+        viewModel = ViewModelProviders.of(getActivity()).get(ToDoViewModel.class);
         ButterKnife.bind(this, view);
 
         mAdapter = new JobAdapter(new ArrayList<>(), new ArrayList<>());
@@ -49,15 +50,12 @@ public class ToDoFragment extends Fragment{
 
         setListeners();
 
-
-        viewModel = ViewModelProviders.of(getActivity()).get(ToDoViewModel.class);
-        viewModel.searchResult().observe(
-                this, jobs -> {
-                    viewModel.getUsers().observe(this, users -> {
-                        mAdapter.setUsers(users);
-                    });
-                    mAdapter.setJobs(jobs);
-                }
+        viewModel.searchResult().observe(this, jobs -> {
+                viewModel.getUsers().observe(this, users -> {
+                    mAdapter.setUsers(users);
+                });
+                mAdapter.setJobs(jobs);
+            }
         );
 
         return  view;

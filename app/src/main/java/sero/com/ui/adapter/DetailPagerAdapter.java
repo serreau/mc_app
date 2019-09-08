@@ -10,14 +10,17 @@ import sero.com.ui.detailJob.DetailsFragment;
 import sero.com.ui.done.DoneFragment;
 import sero.com.ui.inprogress.InProgressFragment;
 import sero.com.ui.offer.OfferFragment;
+import sero.com.ui.offers.OffersFragment;
 import sero.com.ui.todo.ToDoFragment;
 
 public class DetailPagerAdapter extends FragmentPagerAdapter {
     private Long jobId;
+    private boolean isOwner;
 
-    public DetailPagerAdapter(FragmentManager fm, Long jobName) {
+    public DetailPagerAdapter(FragmentManager fm, Long jobId, boolean isOwner) {
         super(fm);
-        this.jobId = jobName;
+        this.jobId = jobId;
+        this.isOwner = isOwner;
     }
 
     @Override
@@ -35,9 +38,16 @@ public class DetailPagerAdapter extends FragmentPagerAdapter {
                 detail.setArguments(b);
                 return detail;
             case 1 :
-                Fragment offer = new OfferFragment();
-                offer.setArguments(b);
-                return offer;
+                Fragment f;
+                if(isOwner){
+                    f = new OffersFragment();
+                    f.setArguments(b);
+                }
+                else {
+                    f = new OfferFragment();
+                    f.setArguments(b);
+                }
+                return f;
             default:
                 return null;
         }

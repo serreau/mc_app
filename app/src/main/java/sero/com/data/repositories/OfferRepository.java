@@ -15,4 +15,6 @@ public interface OfferRepository {
     LiveData<List<Offer>> get();
 
     LiveData<Offer> getBySenderAndJob(String login, long jobId);
+
+    LiveData<List<Offer>> getByJob(Long jobId);
 }

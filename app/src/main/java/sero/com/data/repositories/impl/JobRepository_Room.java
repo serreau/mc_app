@@ -52,4 +52,9 @@ public class JobRepository_Room implements JobRepository {
         return jobDao.getByOwnerStateSearch(owner, state, search);
     }
 
+    @Override
+    public LiveData<Boolean> isOwner(String login, long jobId) {
+        return jobDao.isOwner( login, jobId);
+    }
+
 }
